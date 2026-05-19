@@ -581,7 +581,7 @@ function kpiSection(d,hasPre,isYape){
 
 function renderDonuts(d,hasPre,isYape){
   const col={pre:'#7c3aed',dig:entColor(),trad:'#94a3b8'};
-  [['dc','cd','ct','dvp'],['dd','dvd','dvt','dvp'],['dr','rd','rt','rp']].forEach(([id,kd,kt,kp])=>{
+  [['dc','cd','ct',null],['dd','dvd','dvt','dvp'],['dr','rd','rt','rp']].forEach(([id,kd,kt,kp])=>{
     const vals=[];
     if(hasPre&&kp&&!isZ(d[kp]))vals.push({v:d[kp],c:col.pre});
     if(!isZ(d[kd]))vals.push({v:d[kd],c:col.dig});
@@ -761,8 +761,7 @@ function renderTotal(p){
     const tramosSin121=tramos.filter(t=>t.k!=='t121');
     const lbls=tramosSin121.map(t=>t.l);
     const ds=hasPre
-      ?[{label:'Pre-gestión',data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:'#7c3aed',borderRadius:4,borderSkipped:false},
-        {label:'Digital',    data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
+      ?[{label:'Digital',    data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
         {label:'Tradicional',data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
       :[{label:'Digital',data:tramosSin121.map(t=>{const r=src[t.k];return r?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false}];
     barCliChart('bTot',lbls,ds);
@@ -808,8 +807,7 @@ function renderTramoRes(p,key,title,hasPre){
     } else if(!isYape&&subDef.length){
       const lbls=subDef.map(s=>s.l);
       const ds=hasPre
-        ?[{label:'Pre',data:subDef.map(s=>{const r=BCP[s.k];return r?r.cd:null;}),backgroundColor:'#7c3aed',borderRadius:4,borderSkipped:false},
-          {label:'Digital',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
+        ?[{label:'Digital',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
           {label:'Tradicional',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
         :[{label:'Digital',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
           {label:'Tradicional',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
@@ -848,8 +846,7 @@ function renderPortRes(p,key,portLabel,tramoLabel,hasPre,isPyme){
     const col=entColor();
     const lbls=segsKeys.map(s=>s.l);
     const ds=hasPre
-      ?[{label:'Pre',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:'#7c3aed',borderRadius:4,borderSkipped:false},
-        {label:'Digital',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
+      ?[{label:'Digital',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
         {label:'Tradicional',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
       :[{label:'Digital',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
         {label:'Tradicional',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
@@ -890,8 +887,7 @@ function renderSegRes(p,key,segLabel,ctxLabel,hasPre,isPyme){
     const col=entColor();
     const lbls=availTks.map(tk=>TK[tk]);
     const ds=hasPre
-      ?[{label:'Pre',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:'#7c3aed',borderRadius:4,borderSkipped:false},
-        {label:'Digital',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
+      ?[{label:'Digital',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
         {label:'Tradicional',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
       :[{label:'Digital',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
         {label:'Tradicional',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
