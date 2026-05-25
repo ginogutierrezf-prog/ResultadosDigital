@@ -12,8 +12,8 @@
   --bcp:#1a5fd4;--bcp-pale:rgba(26,95,212,.08);--bcp-glow:rgba(26,95,212,.14);
   --yape:#e0500a;--yape-pale:rgba(224,80,10,.08);--yape-glow:rgba(224,80,10,.14);
   --pre:#7c3aed;--pre-pale:rgba(124,58,237,.08);
-  --trad:#64748b;--trad-pale:rgba(100,116,139,.1);
-  --tot:#0f766e;--tot-pale:rgba(15,118,110,.08);
+  --dig:#1a5fd4;--trad:#64748b;--trad-pale:rgba(100,116,139,.1);
+  --tot:#0f766e;
   --green:#15803d;--green-bg:rgba(21,128,61,.09);
   --red:#b91c1c;--red-bg:rgba(185,28,28,.09);
   --amber:#b45309;--amber-bg:rgba(180,83,9,.08);
@@ -27,21 +27,156 @@ html{-webkit-text-size-adjust:100%;}
 body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;-webkit-font-smoothing:antialiased;}
 
 /* HEADER */
-.hdr{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:200;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.hdr-left{display:flex;align-items:center;gap:11px;min-width:0;}
-.hdr-logo{width:32px;height:32px;flex-shrink:0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;}
-.hdr-logo.bcp{background:linear-gradient(135deg,var(--bcp),var(--pre));}
-.hdr-logo.yape{background:linear-gradient(135deg,var(--yape),#f97316);}
-.hdr-title{font-size:15px;font-weight:700;white-space:nowrap;}
-.hdr-badges{display:flex;gap:6px;align-items:center;flex-shrink:0;}
+.hdr{padding:12px 20px;border-bottom:1px solid var(--border);background:var(--surface);position:sticky;top:0;z-index:300;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.hdr-left{display:flex;align-items:center;gap:11px;}
+.hdr-logo{width:32px;height:32px;flex-shrink:0;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff;background:linear-gradient(135deg,#1a5fd4,#7c3aed);}
+.hdr-title{font-size:15px;font-weight:700;}
+.hdr-badges{display:flex;gap:6px;align-items:center;}
 .badge{font-family:var(--mono);font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px;border:1px solid var(--border2);color:var(--text2);background:var(--surface2);}
 .badge.green{color:var(--green);border-color:rgba(21,128,61,.28);background:rgba(21,128,61,.07);}
+.badge.blue{color:var(--bcp);border-color:rgba(26,95,212,.28);background:var(--bcp-pale);}
 
-/* ENTITY TABS */
-.entity-bar{display:flex;gap:8px;padding:10px 16px;border-bottom:1px solid var(--border);background:var(--surface);}
-.ent-tab{padding:7px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text3);transition:all .16s;}
-.ent-tab.bcp.active{color:var(--bcp);border-color:var(--bcp);background:var(--bcp-pale);box-shadow:0 0 0 3px rgba(26,95,212,.08);}
-.ent-tab.yape.active{color:var(--yape);border-color:var(--yape);background:var(--yape-pale);box-shadow:0 0 0 3px rgba(224,80,10,.08);}
+/* MAIN TABS */
+.main-tabs{display:flex;gap:0;background:var(--surface);border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:57px;z-index:200;}
+.main-tab{padding:11px 20px;border:none;background:transparent;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text3);border-bottom:3px solid transparent;transition:all .16s;margin-bottom:-1px;}
+.main-tab:hover{color:var(--text2);}
+.main-tab.active{color:var(--bcp);border-bottom-color:var(--bcp);}
+.main-tab .tab-icon{margin-right:6px;font-size:14px;}
+
+/* PAGE CONTAINERS */
+.page{display:none;}
+.page.active{display:block;}
+
+/* ══════════════════════════════════
+   INDICADORES PAGE
+══════════════════════════════════ */
+.ind-page{padding:24px 24px 40px;}
+
+/* Entity selector */
+.ind-entity-bar{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap;align-items:center;}
+.ind-ent-btn{padding:7px 18px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text3);transition:all .16s;}
+.ind-ent-btn.bcp.active{color:var(--bcp);border-color:var(--bcp);background:var(--bcp-pale);}
+.ind-ent-btn.yape.active{color:var(--yape);border-color:var(--yape);background:var(--yape-pale);}
+.ind-ent-btn.b120.active{color:var(--pre);border-color:var(--pre);background:var(--pre-pale);}
+.ind-ent-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;background:currentColor;}
+.ind-label{font-family:var(--mono);font-size:10px;color:var(--text3);margin-left:6px;}
+
+/* Section title */
+.ind-section-title{font-size:20px;font-weight:800;letter-spacing:-.5px;margin-bottom:4px;}
+.ind-section-sub{font-family:var(--mono);font-size:11px;color:var(--text3);margin-bottom:20px;}
+
+/* DELTA CARDS */
+.delta-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px;}
+.delta-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);position:relative;overflow:hidden;}
+.delta-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;border-radius:var(--r) var(--r) 0 0;}
+.delta-card.bcp::before{background:var(--bcp);}
+.delta-card.yape::before{background:var(--yape);}
+.delta-card.b120::before{background:var(--pre);}
+.delta-label{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--text3);margin-bottom:8px;}
+.delta-val{font-size:22px;font-weight:800;letter-spacing:-.8px;line-height:1;margin-bottom:6px;}
+.delta-card.bcp .delta-val{color:var(--bcp);}
+.delta-card.yape .delta-val{color:var(--yape);}
+.delta-card.b120 .delta-val{color:var(--pre);}
+.delta-sub{font-family:var(--mono);font-size:10px;color:var(--text3);margin-bottom:8px;}
+.delta-change{display:flex;align-items:center;gap:6px;padding-top:8px;border-top:1px solid var(--border);}
+.delta-arrow{font-size:11px;font-weight:700;font-family:var(--mono);}
+.delta-arrow.up{color:var(--green);}
+.delta-arrow.down{color:var(--red);}
+.delta-arrow.flat{color:var(--amber);}
+.delta-vs{font-family:var(--mono);font-size:10px;color:var(--text3);}
+
+/* CANAL BREAKDOWN inside delta card */
+.canal-mini{display:flex;flex-direction:column;gap:3px;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);}
+.canal-mini-row{display:flex;align-items:center;justify-content:space-between;}
+.canal-mini-label{font-family:var(--mono);font-size:9px;color:var(--text3);display:flex;align-items:center;gap:4px;}
+.canal-mini-dot{width:6px;height:6px;border-radius:50%;}
+.canal-mini-val{font-family:var(--mono);font-size:10px;font-weight:600;color:var(--text2);}
+.canal-mini-pct{font-family:var(--mono);font-size:9px;color:var(--text4);}
+
+/* TREND CHARTS */
+.trend-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px;}
+.trend-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);}
+.trend-title{font-size:13px;font-weight:700;color:var(--text);margin-bottom:3px;}
+.trend-sub{font-family:var(--mono);font-size:9.5px;color:var(--text3);margin-bottom:14px;}
+
+/* CORTE TABLE */
+.corte-table-wrap{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow);margin-bottom:28px;}
+.corte-table-hdr{padding:12px 16px;border-bottom:1px solid var(--border);background:var(--surface2);display:flex;align-items:center;justify-content:space-between;}
+.corte-table-title{font-size:13px;font-weight:700;color:var(--text);}
+.corte-scroll{overflow-x:auto;}
+.corte-table{width:100%;border-collapse:collapse;min-width:700px;}
+.corte-table thead tr{background:var(--surface2);}
+.corte-table th{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);padding:9px 13px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--border);}
+.corte-table th:first-child{text-align:left;}
+.corte-table th.th-pre{color:var(--pre);}
+.corte-table th.th-dig{color:var(--bcp);}
+.corte-table th.th-trad{color:var(--trad);}
+.corte-table tbody tr{border-top:1px solid var(--border);transition:background .09s;}
+.corte-table tbody tr:hover{background:var(--surface2);}
+.corte-table tbody tr.row-date{background:var(--surface3);}
+.corte-table td{padding:9px 13px;font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--text2);text-align:right;white-space:nowrap;}
+.corte-table td:first-child{text-align:left;font-family:var(--sans);font-weight:700;font-size:13px;color:var(--text);}
+.corte-table td.date-cell{font-weight:700;color:var(--text);font-family:var(--sans);font-size:12px;}
+
+/* PILLS */
+.pill{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10.5px;font-weight:600;font-family:var(--mono);white-space:nowrap;}
+.pill.bcp{background:var(--bcp-pale);color:var(--bcp);}
+.pill.yape{background:var(--yape-pale);color:var(--yape);}
+.pill.pre{background:var(--pre-pale);color:var(--pre);}
+.pill.trad{background:var(--trad-pale);color:var(--trad);}
+.pill.win{background:var(--green-bg);color:var(--green);}
+.pill.loss{background:var(--red-bg);color:var(--red);}
+.pill.tie{background:var(--amber-bg);color:var(--amber);}
+.pill.na{background:var(--surface3);color:var(--text3);}
+
+/* ══════════════════════════════════
+   SEGUIMIENTO PAGE
+══════════════════════════════════ */
+.seg-page{display:flex;height:calc(100vh - 105px);overflow:hidden;}
+
+/* NAV */
+.left-panel{width:258px;min-width:258px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:14px 0;flex-shrink:0;transition:transform .25s ease;}
+.left-panel::-webkit-scrollbar{width:3px;}
+.left-panel::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+.nav-label{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:2px;color:var(--text4);text-transform:uppercase;padding:0 15px 9px;}
+.tramo-tree{padding:0 5px;}
+.tramo-item{margin-bottom:2px;}
+.t-btn{width:100%;display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;background:transparent;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text2);text-align:left;transition:all .13s;}
+.t-btn:hover{background:var(--surface2);}
+.t-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);}
+.t-btn.active-yape{background:var(--yape-pale);color:var(--yape);}
+.t-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:var(--mono);font-weight:600;flex-shrink:0;background:var(--surface3);color:var(--text3);}
+.t-btn.active-bcp .t-icon{background:var(--bcp-glow);color:var(--bcp);}
+.t-btn.active-yape .t-icon{background:var(--yape-glow);color:var(--yape);}
+.t-label{flex:1;line-height:1.2;}
+.t-desc{font-size:10px;color:var(--text4);font-weight:400;font-family:var(--mono);display:block;margin-top:1px;}
+.chevron{font-size:9px;color:var(--text4);transition:transform .18s;}
+.t-btn.expanded .chevron{transform:rotate(90deg);}
+.sub-items{display:none;margin-left:13px;padding-left:10px;border-left:2px solid var(--border);margin-top:1px;}
+.sub-items.open{display:block;}
+.s-btn{width:100%;display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;background:transparent;border:none;cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text3);text-align:left;transition:all .11s;margin-bottom:1px;}
+.s-btn:hover{background:var(--surface2);color:var(--text2);}
+.s-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);font-weight:600;}
+.s-btn.active-yape{background:var(--yape-pale);color:var(--yape);font-weight:600;}
+.s-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
+.ss-items{display:none;margin-left:10px;padding-left:8px;border-left:1px dashed var(--border2);margin-top:1px;}
+.ss-items.open{display:block;}
+.ss-btn{width:100%;display:flex;align-items:center;gap:7px;padding:4px 8px;border-radius:5px;background:transparent;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--text4);text-align:left;transition:all .1s;margin-bottom:1px;}
+.ss-btn:hover{background:var(--surface2);color:var(--text2);}
+.ss-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);}
+.sss-items{display:none;margin-left:10px;padding-left:8px;border-left:1px dotted var(--border2);margin-top:1px;}
+.sss-items.open{display:block;}
+.sss-btn{width:100%;display:flex;align-items:center;gap:6px;padding:3px 7px;border-radius:4px;background:transparent;border:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;color:var(--text4);text-align:left;transition:all .1s;margin-bottom:1px;}
+.sss-btn:hover{background:var(--surface2);color:var(--text2);}
+.sss-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);}
+.divider{height:1px;background:var(--border);margin:8px 11px;}
+.group-badge{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text4);padding:2px 13px 6px;}
+
+/* ENTITY TABS inside seg page */
+.ent-bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
+.ent-tab{padding:7px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text3);transition:all .16s;}
+.ent-tab.bcp.active{color:var(--bcp);border-color:var(--bcp);background:var(--bcp-pale);}
+.ent-tab.yape.active{color:var(--yape);border-color:var(--yape);background:var(--yape-pale);}
 .ent-dot{display:inline-block;width:6px;height:6px;border-radius:50%;margin-right:5px;background:currentColor;}
 
 /* HAMBURGER */
@@ -52,49 +187,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .hamburger.open span:nth-child(3){transform:translateY(-6px) rotate(-45deg);}
 .drawer-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:150;opacity:0;transition:opacity .25s;}
 .drawer-overlay.open{display:block;opacity:1;}
-
-/* LAYOUT */
-.main{display:flex;height:calc(100vh - 105px);overflow:hidden;}
-
-/* NAV */
-.left-panel{width:260px;min-width:260px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:14px 0;flex-shrink:0;transition:transform .25s ease;}
-.left-panel::-webkit-scrollbar{width:3px;}
-.left-panel::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
-.nav-label{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:2px;color:var(--text4);text-transform:uppercase;padding:0 15px 8px;}
-.tramo-tree{padding:0 5px;}
-.tramo-item{margin-bottom:2px;}
-.tramo-btn{width:100%;display:flex;align-items:center;gap:9px;padding:8px 9px;border-radius:8px;background:transparent;border:none;cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--text2);text-align:left;transition:all .13s;}
-.tramo-btn:hover{background:var(--surface2);}
-.tramo-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);}
-.tramo-btn.active-yape{background:var(--yape-pale);color:var(--yape);}
-.tramo-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-family:var(--mono);font-weight:600;flex-shrink:0;background:var(--surface3);color:var(--text3);}
-.tramo-btn.active-bcp .tramo-icon{background:var(--bcp-glow);color:var(--bcp);}
-.tramo-btn.active-yape .tramo-icon{background:var(--yape-glow);color:var(--yape);}
-.tramo-label{flex:1;line-height:1.2;}
-.tramo-desc{font-size:10px;color:var(--text4);font-weight:400;font-family:var(--mono);display:block;margin-top:1px;}
-.chevron{font-size:9px;color:var(--text4);transition:transform .18s;}
-.tramo-btn.expanded .chevron{transform:rotate(90deg);}
-.sub-items{display:none;margin-left:13px;padding-left:10px;border-left:2px solid var(--border);margin-top:1px;}
-.sub-items.open{display:block;}
-.sub-btn{width:100%;display:flex;align-items:center;gap:8px;padding:6px 9px;border-radius:6px;background:transparent;border:none;cursor:pointer;font-family:var(--mono);font-size:11px;color:var(--text3);text-align:left;transition:all .11s;margin-bottom:1px;}
-.sub-btn:hover{background:var(--surface2);color:var(--text2);}
-.sub-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);font-weight:600;}
-.sub-btn.active-yape{background:var(--yape-pale);color:var(--yape);font-weight:600;}
-.sub-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0;}
-.subsub-items{display:none;margin-left:10px;padding-left:8px;border-left:1px dashed var(--border2);margin-top:1px;}
-.subsub-items.open{display:block;}
-.ss-btn{width:100%;display:flex;align-items:center;gap:7px;padding:4px 8px;border-radius:5px;background:transparent;border:none;cursor:pointer;font-family:var(--mono);font-size:10px;color:var(--text4);text-align:left;transition:all .1s;margin-bottom:1px;}
-.ss-btn:hover{background:var(--surface2);color:var(--text2);}
-.ss-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);}
-.ss-btn.active-yape{background:var(--yape-pale);color:var(--yape);}
-.sss-items{display:none;margin-left:10px;padding-left:8px;border-left:1px dotted var(--border2);margin-top:1px;}
-.sss-items.open{display:block;}
-.sss-btn{width:100%;display:flex;align-items:center;gap:6px;padding:3px 7px;border-radius:4px;background:transparent;border:none;cursor:pointer;font-family:var(--mono);font-size:9.5px;color:var(--text4);text-align:left;transition:all .1s;margin-bottom:1px;}
-.sss-btn:hover{background:var(--surface2);color:var(--text2);}
-.sss-btn.active-bcp{background:var(--bcp-pale);color:var(--bcp);}
-.sss-btn.active-yape{background:var(--yape-pale);color:var(--yape);}
-.divider{height:1px;background:var(--border);margin:8px 11px;}
-.group-badge{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text4);padding:2px 13px 6px;}
 
 /* RIGHT PANEL */
 .right-panel{flex:1;overflow-y:auto;padding:20px;background:var(--bg);min-width:0;}
@@ -124,7 +216,7 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .wl-diff{font-family:var(--mono);font-size:12px;font-weight:700;padding:2px 9px;border-radius:6px;background:rgba(255,255,255,.65);white-space:nowrap;}
 .no-pre{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:8px;background:var(--amber-bg);border:1px solid rgba(180,83,9,.22);color:var(--amber);font-family:var(--mono);font-size:11px;margin-bottom:14px;}
 
-/* KPI DONUT GRID */
+/* KPI DONUTS */
 .kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px;}
 .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 12px 12px;box-shadow:var(--shadow);display:flex;flex-direction:column;align-items:center;}
 .kpi-card-title{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.9px;text-transform:uppercase;color:var(--text3);margin-bottom:10px;text-align:center;}
@@ -140,17 +232,6 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .leg-val{font-family:var(--mono);font-size:9.5px;font-weight:600;color:var(--text2);}
 .leg-pct{font-family:var(--mono);font-size:9px;color:var(--text4);}
 
-/* PILLS */
-.pill{display:inline-block;padding:2px 6px;border-radius:4px;font-size:10.5px;font-weight:600;font-family:var(--mono);white-space:nowrap;}
-.pill.bcp{background:var(--bcp-pale);color:var(--bcp);}
-.pill.yape{background:var(--yape-pale);color:var(--yape);}
-.pill.pre{background:var(--pre-pale);color:var(--pre);}
-.pill.trad{background:var(--trad-pale);color:var(--trad);}
-.pill.na{background:var(--surface3);color:var(--text3);}
-.pill.win{background:var(--green-bg);color:var(--green);}
-.pill.loss{background:var(--red-bg);color:var(--red);}
-.pill.tie{background:var(--amber-bg);color:var(--amber);}
-
 /* CHARTS */
 .charts-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;}
 .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:14px 14px 12px;box-shadow:var(--shadow);min-width:0;}
@@ -164,7 +245,7 @@ canvas{display:block;width:100%!important;}
 .tbl-title{font-size:13px;font-weight:700;color:var(--text);flex:1;}
 .tbl-badge{font-family:var(--mono);font-size:9.5px;padding:2px 7px;border-radius:4px;border:1px solid var(--border2);color:var(--text3);}
 .tbl-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
-table{width:100%;border-collapse:collapse;min-width:640px;}
+table{width:100%;border-collapse:collapse;min-width:600px;}
 thead tr{background:var(--surface2);}
 th{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:.7px;text-transform:uppercase;color:var(--text3);padding:8px 11px;text-align:right;white-space:nowrap;border-bottom:1px solid var(--border);}
 th:first-child{text-align:left;}
@@ -172,7 +253,6 @@ th.th-dig{color:var(--bcp);}th.th-pre{color:var(--pre);}th.th-trad{color:var(--t
 tbody tr{border-top:1px solid var(--border);transition:background .09s;}
 tbody tr.cl{cursor:pointer;}tbody tr.cl:hover{background:var(--surface2);}
 tbody tr.rs td:first-child{padding-left:24px;font-size:12px;font-family:var(--mono);font-weight:500;color:var(--text2);}
-tbody tr.rss td:first-child{padding-left:38px;font-size:11px;font-family:var(--mono);font-weight:400;color:var(--text3);}
 td{padding:9px 11px;font-family:var(--mono);font-size:11.5px;font-weight:500;color:var(--text2);text-align:right;white-space:nowrap;}
 td:first-child{text-align:left;color:var(--text);font-weight:700;font-family:var(--sans);font-size:13px;}
 .gap-cell{text-align:center!important;}
@@ -190,13 +270,25 @@ td:first-child{text-align:left;color:var(--text);font-weight:700;font-family:var
 /* RESPONSIVE */
 @media(max-width:900px){
   .hamburger{display:flex;}
-  .left-panel{position:fixed;left:0;top:0;bottom:0;z-index:160;transform:translateX(-100%);box-shadow:var(--shadow-md);padding-top:60px;}
+  .left-panel{position:fixed;left:0;top:0;bottom:0;z-index:160;transform:translateX(-100%);box-shadow:var(--shadow-md);padding-top:110px;}
   .left-panel.open{transform:translateX(0);}
-  .main{height:calc(100vh - 105px);}
+  .seg-page{height:calc(100vh - 105px);}
   .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .delta-grid{grid-template-columns:repeat(2,1fr);}
+  .trend-grid{grid-template-columns:1fr;}
 }
-@media(max-width:768px){.charts-row{grid-template-columns:1fr;}}
-@media(max-width:480px){.hdr-title{font-size:14px;}.right-panel{padding:14px 12px;}.kpi-grid{grid-template-columns:repeat(2,1fr);gap:8px;}.sec-title{font-size:20px;}.charts-row{grid-template-columns:1fr;}}
+@media(max-width:768px){
+  .charts-row{grid-template-columns:1fr;}
+  .trend-grid{grid-template-columns:1fr;}
+}
+@media(max-width:480px){
+  .right-panel{padding:14px 12px;}
+  .ind-page{padding:16px 14px 32px;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);gap:8px;}
+  .delta-grid{grid-template-columns:1fr 1fr;gap:10px;}
+  .sec-title{font-size:20px;}
+  .charts-row{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
@@ -205,340 +297,406 @@ td:first-child{text-align:left;color:var(--text);font-weight:700;font-family:var
 <header class="hdr">
   <div class="hdr-left">
     <button class="hamburger" id="hamburger" onclick="toggleDrawer()"><span></span><span></span><span></span></button>
-    <div class="hdr-logo bcp" id="hdrLogo">CD</div>
-    <div><div class="hdr-title" id="hdrTitle">Cobranza Digital · BCP</div></div>
+    <div class="hdr-logo">CD</div>
+    <div><div class="hdr-title">Cobranza Digital · BCP &amp; Yape</div></div>
   </div>
   <div class="hdr-badges">
     <div class="badge">MAYO 2026</div>
-    <div class="badge green">● Corte 14/05</div>
+    <div class="badge green">● Corte 20/05</div>
+    <div class="badge blue">3 timings</div>
   </div>
 </header>
 
-<!-- ENTITY TABS -->
-<div class="entity-bar">
-  <button class="ent-tab bcp active" id="tab-bcp" onclick="setEntity('bcp')"><span class="ent-dot"></span>BCP</button>
-  <button class="ent-tab yape" id="tab-yape" onclick="setEntity('yape')"><span class="ent-dot"></span>Yape</button>
+<!-- MAIN TABS -->
+<div class="main-tabs">
+  <button class="main-tab active" id="tab-ind" onclick="showPage('ind')">
+    <span class="tab-icon">📈</span>Indicadores del Mes
+  </button>
+  <button class="main-tab" id="tab-seg" onclick="showPage('seg')">
+    <span class="tab-icon">🔍</span>Seguimiento Detallado
+  </button>
 </div>
 
+<!-- DRAWER OVERLAY -->
 <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
 
-<div class="main">
-  <!-- NAV -->
-  <nav class="left-panel" id="leftPanel">
-    <div class="tramo-tree">
-      <div class="nav-label">Navegación</div>
+<!-- ════════════════════════════════════
+     PAGE 1: INDICADORES
+════════════════════════════════════ -->
+<div class="page active" id="page-ind">
+<div class="ind-page">
 
-      <!-- TOTAL -->
-      <div class="tramo-item">
-        <button class="tramo-btn" id="nav-total" onclick="navAndClose('total')">
-          <div class="tramo-icon">∑</div>
-          <div class="tramo-label">Total 1–120<span class="tramo-desc">Vista consolidada</span></div>
-        </button>
-      </div>
-      <div class="divider"></div>
-      <div class="group-badge">Tramos de Mora</div>
+  <!-- Entity selector -->
+  <div class="ind-entity-bar">
+    <button class="ind-ent-btn bcp active" id="ieb-general" onclick="setIndEntity('general')" style="background:linear-gradient(135deg,rgba(26,95,212,.08),rgba(224,80,10,.08));border-color:#6b7280;color:#374151;">🌐 General</button>
+    <button class="ind-ent-btn bcp" id="ieb-bcp" onclick="setIndEntity('bcp')"><span class="ind-ent-dot"></span>BCP Activa</button>
+    <button class="ind-ent-btn b120" id="ieb-b120" onclick="setIndEntity('b120')"><span class="ind-ent-dot"></span>BCP +120</button>
+    <button class="ind-ent-btn yape" id="ieb-yape" onclick="setIndEntity('yape')"><span class="ind-ent-dot"></span>Yape</button>
+    <span class="ind-label">Vista General suma todas las entidades</span>
+  </div>
 
-      <!-- 1-30 -->
-      <div class="tramo-item">
-        <button class="tramo-btn" id="nav-t130" onclick="toggleT('t130')">
-          <div class="tramo-icon">30</div>
-          <div class="tramo-label">Tramo 1–30<span class="tramo-desc" id="desc-t130">Personas · Pyme · Segmentos</span></div>
-          <span class="chevron">▶</span>
-        </button>
-        <div class="sub-items" id="sub-t130">
-          <button class="sub-btn" id="nav-t130-res" onclick="navAndClose('t130-res')"><span class="sub-dot"></span>Resumen tramo</button>
-          <!-- Personas 1-30 -->
-          <button class="sub-btn" id="nav-p130" onclick="toggleSub('p130')"><span class="sub-dot"></span>Personas ▸</button>
-          <div class="subsub-items" id="sub-p130">
-            <button class="ss-btn" id="nav-p130-res" onclick="navAndClose('p130-res')">• Total Personas</button>
-            <button class="ss-btn" id="nav-segA130" onclick="toggleSS('segA130')">• Seg A ▸</button>
-            <div class="sss-items" id="sub-segA130">
-              <button class="sss-btn" id="nav-segA130-res" onclick="navAndClose('segA130-res')">◦ Total Seg A</button>
-              <button class="sss-btn" id="nav-segA130-0-1k" onclick="navAndClose('segA130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-segA130-1k-5k" onclick="navAndClose('segA130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-segA130-5k-20k" onclick="navAndClose('segA130-5k-20k')">◦ 5K–20K</button>
-              <button class="sss-btn" id="nav-segA130-20k-300k" onclick="navAndClose('segA130-20k-300k')">◦ 20K–300K</button>
-              <button class="sss-btn" id="nav-segA130-300k" onclick="navAndClose('segA130-300k')">◦ 300K+</button>
-            </div>
-            <button class="ss-btn" id="nav-segB130" onclick="toggleSS('segB130')">• Seg B ▸</button>
-            <div class="sss-items" id="sub-segB130">
-              <button class="sss-btn" id="nav-segB130-res" onclick="navAndClose('segB130-res')">◦ Total Seg B</button>
-              <button class="sss-btn" id="nav-segB130-0-1k" onclick="navAndClose('segB130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-segB130-1k-5k" onclick="navAndClose('segB130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-segB130-5k-20k" onclick="navAndClose('segB130-5k-20k')">◦ 5K–20K</button>
-              <button class="sss-btn" id="nav-segB130-20k-300k" onclick="navAndClose('segB130-20k-300k')">◦ 20K–300K</button>
-              <button class="sss-btn" id="nav-segB130-300k" onclick="navAndClose('segB130-300k')">◦ 300K+</button>
-            </div>
-            <button class="ss-btn" id="nav-segC130" onclick="toggleSS('segC130')">• Seg C ▸</button>
-            <div class="sss-items" id="sub-segC130">
-              <button class="sss-btn" id="nav-segC130-res" onclick="navAndClose('segC130-res')">◦ Total Seg C</button>
-              <button class="sss-btn" id="nav-segC130-0-1k" onclick="navAndClose('segC130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-segC130-1k-5k" onclick="navAndClose('segC130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-segC130-5k-20k" onclick="navAndClose('segC130-5k-20k')">◦ 5K–20K</button>
-            </div>
-            <button class="ss-btn" id="nav-segD130" onclick="toggleSS('segD130')">• Seg D ▸</button>
-            <div class="sss-items" id="sub-segD130">
-              <button class="sss-btn" id="nav-segD130-res" onclick="navAndClose('segD130-res')">◦ Total Seg D</button>
-              <button class="sss-btn" id="nav-segD130-0-1k" onclick="navAndClose('segD130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-segD130-1k-5k" onclick="navAndClose('segD130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-segD130-5k-20k" onclick="navAndClose('segD130-5k-20k')">◦ 5K–20K</button>
-            </div>
-          </div>
-          <!-- Pyme 1-30 -->
-          <button class="sub-btn" id="nav-py130" onclick="toggleSub('py130')"><span class="sub-dot"></span>Pyme ▸</button>
-          <div class="subsub-items" id="sub-py130">
-            <button class="ss-btn" id="nav-py130-res" onclick="navAndClose('py130-res')">• Total Pyme</button>
-            <button class="ss-btn" id="nav-pyA130" onclick="toggleSS('pyA130')">• Seg A ▸</button>
-            <div class="sss-items" id="sub-pyA130">
-              <button class="sss-btn" id="nav-pyA130-res" onclick="navAndClose('pyA130-res')">◦ Total Seg A</button>
-              <button class="sss-btn" id="nav-pyA130-0-1k" onclick="navAndClose('pyA130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-pyA130-1k-5k" onclick="navAndClose('pyA130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-pyA130-5k-20k" onclick="navAndClose('pyA130-5k-20k')">◦ 5K–20K</button>
-              <button class="sss-btn" id="nav-pyA130-20k-300k" onclick="navAndClose('pyA130-20k-300k')">◦ 20K–300K</button>
-              <button class="sss-btn" id="nav-pyA130-300k" onclick="navAndClose('pyA130-300k')">◦ 300K+</button>
-            </div>
-            <button class="ss-btn" id="nav-pyB130" onclick="toggleSS('pyB130')">• Seg B ▸</button>
-            <div class="sss-items" id="sub-pyB130">
-              <button class="sss-btn" id="nav-pyB130-res" onclick="navAndClose('pyB130-res')">◦ Total Seg B</button>
-              <button class="sss-btn" id="nav-pyB130-0-1k" onclick="navAndClose('pyB130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-pyB130-1k-5k" onclick="navAndClose('pyB130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-pyB130-5k-20k" onclick="navAndClose('pyB130-5k-20k')">◦ 5K–20K</button>
-              <button class="sss-btn" id="nav-pyB130-20k-300k" onclick="navAndClose('pyB130-20k-300k')">◦ 20K–300K</button>
-              <button class="sss-btn" id="nav-pyB130-300k" onclick="navAndClose('pyB130-300k')">◦ 300K+</button>
-            </div>
-            <button class="ss-btn" id="nav-pyC130" onclick="toggleSS('pyC130')">• Seg C ▸</button>
-            <div class="sss-items" id="sub-pyC130">
-              <button class="sss-btn" id="nav-pyC130-res" onclick="navAndClose('pyC130-res')">◦ Total Seg C</button>
-              <button class="sss-btn" id="nav-pyC130-0-1k" onclick="navAndClose('pyC130-0-1k')">◦ 0–1K</button>
-              <button class="sss-btn" id="nav-pyC130-1k-5k" onclick="navAndClose('pyC130-1k-5k')">◦ 1K–5K</button>
-              <button class="sss-btn" id="nav-pyC130-5k-20k" onclick="navAndClose('pyC130-5k-20k')">◦ 5K–20K</button>
-              <button class="sss-btn" id="nav-pyC130-20k-300k" onclick="navAndClose('pyC130-20k-300k')">◦ 20K–300K</button>
-            </div>
-            <button class="ss-btn" id="nav-pyD130" onclick="navAndClose('pyD130-res')">• Seg D</button>
-          </div>
-        </div>
-      </div>
+  <!-- Dynamic content injected here -->
+  <div id="ind-content"></div>
 
-      <!-- 31-60 -->
-      <div class="tramo-item">
-        <button class="tramo-btn" id="nav-t3160" onclick="toggleT('t3160')">
-          <div class="tramo-icon">60</div>
-          <div class="tramo-label">Tramo 31–60<span class="tramo-desc">Personas · Pyme (sin Dig.)</span></div>
-          <span class="chevron">▶</span>
-        </button>
-        <div class="sub-items" id="sub-t3160">
-          <button class="sub-btn" id="nav-t3160-res" onclick="navAndClose('t3160-res')"><span class="sub-dot"></span>Resumen tramo</button>
-          <button class="sub-btn" id="nav-p3160" onclick="toggleSub('p3160')"><span class="sub-dot"></span>Personas ▸</button>
-          <div class="subsub-items" id="sub-p3160">
-            <button class="ss-btn" id="nav-p3160-res" onclick="navAndClose('p3160-res')">• Total Personas</button>
-            <button class="ss-btn" id="nav-p3160-0-1k" onclick="navAndClose('p3160-0-1k')">• 0–1K</button>
-            <button class="ss-btn" id="nav-p3160-1k-5k" onclick="navAndClose('p3160-1k-5k')">• 1K–5K</button>
-            <button class="ss-btn" id="nav-p3160-5k-20k" onclick="navAndClose('p3160-5k-20k')">• 5K–20K</button>
-            <button class="ss-btn" id="nav-p3160-20k-300k" onclick="navAndClose('p3160-20k-300k')">• 20K–300K</button>
-            <button class="ss-btn" id="nav-p3160-300k" onclick="navAndClose('p3160-300k')">• 300K+</button>
-          </div>
-          <button class="sub-btn" id="nav-py3160" onclick="navAndClose('py3160-res')"><span class="sub-dot"></span>Pyme (solo Trad.)</button>
-        </div>
-      </div>
+</div>
+</div>
 
-      <!-- 61-90 -->
-      <div class="tramo-item">
-        <button class="tramo-btn" id="nav-t6190" onclick="navAndClose('t6190-res')">
-          <div class="tramo-icon">90</div>
-          <div class="tramo-label">Tramo 61–90<span class="tramo-desc">Sin zoom disponible</span></div>
-        </button>
-      </div>
+<!-- ════════════════════════════════════
+     PAGE 2: SEGUIMIENTO
+════════════════════════════════════ -->
+<div class="page" id="page-seg">
+<div class="seg-page">
 
-      <!-- 91-120 -->
-      <div class="tramo-item">
-        <button class="tramo-btn" id="nav-t91120" onclick="navAndClose('t91120-res')">
-          <div class="tramo-icon">120</div>
-          <div class="tramo-label">Tramo 91–120<span class="tramo-desc">Sin zoom disponible</span></div>
-        </button>
-      </div>
-
-      <div class="divider"></div>
-      <div class="group-badge" id="plus120-group">+120 días · Solo BCP</div>
-      <div class="tramo-item" id="nav-plus120-item">
-        <button class="tramo-btn" id="nav-t121" onclick="toggleT('t121')">
-          <div class="tramo-icon">+</div>
-          <div class="tramo-label">Tramo +120<span class="tramo-desc">0–1K · 1K+ (sin zoom Yape)</span></div>
-          <span class="chevron">▶</span>
-        </button>
-        <div class="sub-items" id="sub-t121">
-          <button class="sub-btn" id="nav-t121-res" onclick="navAndClose('t121-res')"><span class="sub-dot"></span>Resumen tramo</button>
-          <button class="sub-btn" id="nav-t121-0-1k" onclick="navAndClose('t121-0-1k')"><span class="sub-dot"></span>0–1K</button>
-          <button class="sub-btn" id="nav-t121-1k" onclick="navAndClose('t121-1k')"><span class="sub-dot"></span>1K+</button>
-        </div>
-      </div>
+  <!-- LEFT NAV -->
+  <div style="display:flex;flex-direction:column;width:258px;min-width:258px;flex-shrink:0;">
+    <div class="ent-bar">
+      <button class="ent-tab bcp active" id="tab-bcp" onclick="setEntity('bcp')"><span class="ent-dot"></span>BCP</button>
+      <button class="ent-tab yape" id="tab-yape" onclick="setEntity('yape')"><span class="ent-dot"></span>Yape</button>
     </div>
-  </nav>
+    <nav class="left-panel" id="leftPanel" style="height:auto;flex:1;">
+      <div class="tramo-tree">
+        <div class="nav-label">Navegación</div>
+        <div class="tramo-item">
+          <button class="t-btn" id="nav-total" onclick="navAndClose('total')">
+            <div class="t-icon">∑</div>
+            <div class="t-label">Total 1–120<span class="t-desc">Vista consolidada</span></div>
+          </button>
+        </div>
+        <div class="divider"></div>
+        <div class="group-badge">Tramos de Mora</div>
+
+        <!-- 1-30 -->
+        <div class="tramo-item">
+          <button class="t-btn" id="nav-t130" onclick="toggleT('t130')">
+            <div class="t-icon">30</div>
+            <div class="t-label">Tramo 1–30<span class="t-desc">Personas · Pyme</span></div>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="sub-items" id="sub-t130">
+            <button class="s-btn" id="nav-t130-res" onclick="navAndClose('t130-res')"><span class="s-dot"></span>Resumen tramo</button>
+            <button class="s-btn" id="nav-p130" onclick="toggleSub('p130')"><span class="s-dot"></span>Personas ▸</button>
+            <div class="ss-items" id="sub-p130">
+              <button class="ss-btn" id="nav-p130-res" onclick="navAndClose('p130-res')">• Total Personas</button>
+              <button class="ss-btn" id="nav-segA130" onclick="toggleSS('segA130')">• Seg A ▸</button>
+              <div class="sss-items" id="sub-segA130">
+                <button class="sss-btn" id="nav-segA130-res" onclick="navAndClose('segA130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-segA130-0-1k" onclick="navAndClose('segA130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-segA130-1k-5k" onclick="navAndClose('segA130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-segA130-5k-20k" onclick="navAndClose('segA130-5k-20k')">◦ 5K–20K</button>
+                <button class="sss-btn" id="nav-segA130-20k-300k" onclick="navAndClose('segA130-20k-300k')">◦ 20K–300K</button>
+                <button class="sss-btn" id="nav-segA130-300k" onclick="navAndClose('segA130-300k')">◦ 300K+</button>
+              </div>
+              <button class="ss-btn" id="nav-segB130" onclick="toggleSS('segB130')">• Seg B ▸</button>
+              <div class="sss-items" id="sub-segB130">
+                <button class="sss-btn" id="nav-segB130-res" onclick="navAndClose('segB130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-segB130-0-1k" onclick="navAndClose('segB130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-segB130-1k-5k" onclick="navAndClose('segB130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-segB130-5k-20k" onclick="navAndClose('segB130-5k-20k')">◦ 5K–20K</button>
+                <button class="sss-btn" id="nav-segB130-20k-300k" onclick="navAndClose('segB130-20k-300k')">◦ 20K–300K</button>
+                <button class="sss-btn" id="nav-segB130-300k" onclick="navAndClose('segB130-300k')">◦ 300K+</button>
+              </div>
+              <button class="ss-btn" id="nav-segC130" onclick="toggleSS('segC130')">• Seg C ▸</button>
+              <div class="sss-items" id="sub-segC130">
+                <button class="sss-btn" id="nav-segC130-res" onclick="navAndClose('segC130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-segC130-0-1k" onclick="navAndClose('segC130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-segC130-1k-5k" onclick="navAndClose('segC130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-segC130-5k-20k" onclick="navAndClose('segC130-5k-20k')">◦ 5K–20K</button>
+                <button class="sss-btn" id="nav-segC130-20k-300k" onclick="navAndClose('segC130-20k-300k')">◦ 20K–300K</button>
+              </div>
+              <button class="ss-btn" id="nav-segD130" onclick="toggleSS('segD130')">• Seg D ▸</button>
+              <div class="sss-items" id="sub-segD130">
+                <button class="sss-btn" id="nav-segD130-res" onclick="navAndClose('segD130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-segD130-0-1k" onclick="navAndClose('segD130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-segD130-1k-5k" onclick="navAndClose('segD130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-segD130-5k-20k" onclick="navAndClose('segD130-5k-20k')">◦ 5K–20K</button>
+              </div>
+            </div>
+            <button class="s-btn" id="nav-py130" onclick="toggleSub('py130')"><span class="s-dot"></span>Pyme ▸</button>
+            <div class="ss-items" id="sub-py130">
+              <button class="ss-btn" id="nav-py130-res" onclick="navAndClose('py130-res')">• Total Pyme</button>
+              <button class="ss-btn" id="nav-pyA130" onclick="toggleSS('pyA130')">• Seg A ▸</button>
+              <div class="sss-items" id="sub-pyA130">
+                <button class="sss-btn" id="nav-pyA130-res" onclick="navAndClose('pyA130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-pyA130-0-1k" onclick="navAndClose('pyA130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-pyA130-1k-5k" onclick="navAndClose('pyA130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-pyA130-5k-20k" onclick="navAndClose('pyA130-5k-20k')">◦ 5K–20K</button>
+                <button class="sss-btn" id="nav-pyA130-20k-300k" onclick="navAndClose('pyA130-20k-300k')">◦ 20K–300K</button>
+                <button class="sss-btn" id="nav-pyA130-300k" onclick="navAndClose('pyA130-300k')">◦ 300K+</button>
+              </div>
+              <button class="ss-btn" id="nav-pyB130" onclick="toggleSS('pyB130')">• Seg B ▸</button>
+              <div class="sss-items" id="sub-pyB130">
+                <button class="sss-btn" id="nav-pyB130-res" onclick="navAndClose('pyB130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-pyB130-0-1k" onclick="navAndClose('pyB130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-pyB130-1k-5k" onclick="navAndClose('pyB130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-pyB130-5k-20k" onclick="navAndClose('pyB130-5k-20k')">◦ 5K–20K</button>
+                <button class="sss-btn" id="nav-pyB130-20k-300k" onclick="navAndClose('pyB130-20k-300k')">◦ 20K–300K</button>
+                <button class="sss-btn" id="nav-pyB130-300k" onclick="navAndClose('pyB130-300k')">◦ 300K+</button>
+              </div>
+              <button class="ss-btn" id="nav-pyC130" onclick="toggleSS('pyC130')">• Seg C ▸</button>
+              <div class="sss-items" id="sub-pyC130">
+                <button class="sss-btn" id="nav-pyC130-res" onclick="navAndClose('pyC130-res')">◦ Total</button>
+                <button class="sss-btn" id="nav-pyC130-0-1k" onclick="navAndClose('pyC130-0-1k')">◦ 0–1K</button>
+                <button class="sss-btn" id="nav-pyC130-1k-5k" onclick="navAndClose('pyC130-1k-5k')">◦ 1K–5K</button>
+                <button class="sss-btn" id="nav-pyC130-5k-20k" onclick="navAndClose('pyC130-5k-20k')">◦ 5K–20K</button>
+                <button class="sss-btn" id="nav-pyC130-20k-300k" onclick="navAndClose('pyC130-20k-300k')">◦ 20K–300K</button>
+              </div>
+              <button class="ss-btn" id="nav-pyD130" onclick="navAndClose('pyD130-res')">• Seg D</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 31-60 -->
+        <div class="tramo-item">
+          <button class="t-btn" id="nav-t3160" onclick="toggleT('t3160')">
+            <div class="t-icon">60</div>
+            <div class="t-label">Tramo 31–60<span class="t-desc">Personas · Pyme (sin Dig.)</span></div>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="sub-items" id="sub-t3160">
+            <button class="s-btn" id="nav-t3160-res" onclick="navAndClose('t3160-res')"><span class="s-dot"></span>Resumen tramo</button>
+            <button class="s-btn" id="nav-p3160" onclick="toggleSub('p3160')"><span class="s-dot"></span>Personas ▸</button>
+            <div class="ss-items" id="sub-p3160">
+              <button class="ss-btn" id="nav-p3160-res" onclick="navAndClose('p3160-res')">• Total Personas</button>
+              <button class="ss-btn" id="nav-p3160-0-1k" onclick="navAndClose('p3160-0-1k')">• 0–1K</button>
+              <button class="ss-btn" id="nav-p3160-1k-5k" onclick="navAndClose('p3160-1k-5k')">• 1K–5K</button>
+              <button class="ss-btn" id="nav-p3160-5k-20k" onclick="navAndClose('p3160-5k-20k')">• 5K–20K</button>
+              <button class="ss-btn" id="nav-p3160-20k-300k" onclick="navAndClose('p3160-20k-300k')">• 20K–300K</button>
+              <button class="ss-btn" id="nav-p3160-300k" onclick="navAndClose('p3160-300k')">• 300K+</button>
+            </div>
+            <button class="s-btn" id="nav-py3160" onclick="navAndClose('py3160-res')"><span class="s-dot"></span>Pyme (solo Trad.)</button>
+          </div>
+        </div>
+
+        <!-- 61-90 -->
+        <div class="tramo-item">
+          <button class="t-btn" id="nav-t6190" onclick="navAndClose('t6190-res')">
+            <div class="t-icon">90</div>
+            <div class="t-label">Tramo 61–90<span class="t-desc">Sin zoom</span></div>
+          </button>
+        </div>
+
+        <!-- 91-120 -->
+        <div class="tramo-item">
+          <button class="t-btn" id="nav-t91120" onclick="navAndClose('t91120-res')">
+            <div class="t-icon">120</div>
+            <div class="t-label">Tramo 91–120<span class="t-desc">Sin zoom</span></div>
+          </button>
+        </div>
+
+        <div class="divider"></div>
+        <div class="group-badge" id="plus120-group">+120 días · Solo BCP</div>
+        <div class="tramo-item" id="nav-plus120-item">
+          <button class="t-btn" id="nav-t121" onclick="toggleT('t121')">
+            <div class="t-icon">+</div>
+            <div class="t-label">Tramo +120<span class="t-desc">0–1K · 1K+</span></div>
+            <span class="chevron">▶</span>
+          </button>
+          <div class="sub-items" id="sub-t121">
+            <button class="s-btn" id="nav-t121-res" onclick="navAndClose('t121-res')"><span class="s-dot"></span>Resumen</button>
+            <button class="s-btn" id="nav-t121-0-1k" onclick="navAndClose('t121-0-1k')"><span class="s-dot"></span>0–1K</button>
+            <button class="s-btn" id="nav-t121-1k" onclick="navAndClose('t121-1k')"><span class="s-dot"></span>1K+</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </div>
 
   <main class="right-panel" id="rightPanel"></main>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
-// ═══════════════════════════════════════════════════════════════
-//  DATA — SegDigital · Corte 14/05/2026
-//  ch(cli_dig, cli_trad, ef_pre, ef_dig, ef_trad, dv_pre, dv_dig, dv_trad, rec_pre, rec_dig, rec_trad)
-// ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
+//  INDICADORES DATA — 3 timings: 07/05, 14/05, 20/05
+//  Estructura: { cli_pre, cli_dig, cli_trad, part_pre, part_dig, part_trad,
+//                dv_pre, dv_dig, dv_trad, rec_pre, rec_dig, rec_trad }
+// ═══════════════════════════════════════════════════════════════════
+const IND = {
+  bcp: [
+    { date:'07/05', label:'Corte 07/05',
+      cli_pre:27826,  cli_dig:26679,  cli_trad:31370,
+      part_pre:0.324, part_dig:0.310, part_trad:0.366,
+      dv_pre:50.3,    dv_dig:34.704,  dv_trad:134.332,
+      rec_pre:39.4,   rec_dig:11.135, rec_trad:11.473 },
+    { date:'14/05', label:'Corte 14/05',
+      cli_pre:79433,cli_dig:34804,  cli_trad:33339,
+      part_pre:0.538,part_dig:0.236,part_trad:0.226,
+      dv_pre:117.986,dv_dig:51.611, dv_trad:147.424,
+      rec_pre:76.130,rec_dig:22.448,rec_trad:18.197 },
+    { date:'20/05', label:'Corte 20/05',
+      cli_pre:116882,cli_dig:48002, cli_trad:37866,
+      part_pre:0.576,part_dig:0.237,part_trad:0.187,
+      dv_pre:162.545,dv_dig:62.633, dv_trad:154.502,
+      rec_pre:103.515,rec_dig:30.632,rec_trad:27.286 },
+  ],
+  b120: [
+    { date:'07/05', label:'Corte 07/05',
+      cli_pre:0,cli_dig:7271,cli_trad:510195,
+      part_pre:0,part_dig:0.01405,part_trad:0.98595,
+      dv_pre:0,dv_dig:2.2,dv_trad:10124.81,
+      rec_pre:0,rec_dig:0.2,rec_trad:4.38 },
+    { date:'14/05', label:'Corte 14/05',
+      cli_pre:0,cli_dig:7271,cli_trad:510303,
+      part_pre:0,part_dig:0.01405,part_trad:0.98595,
+      dv_pre:0,dv_dig:2.2,dv_trad:10136.287,
+      rec_pre:0,rec_dig:0.2,rec_trad:7.525 },
+    { date:'20/05', label:'Corte 20/05',
+      cli_pre:0,cli_dig:7271,cli_trad:510311,
+      part_pre:0,part_dig:0.01405,part_trad:0.98595,
+      dv_pre:0,dv_dig:2.2,dv_trad:10136.792,
+      rec_pre:0,rec_dig:0.2,rec_trad:12.565 },
+  ],
+  yape: [
+    { date:'07/05', label:'Corte 07/05',
+      cli_pre:159101, cli_dig:222742, cli_trad:0,
+      part_pre:0.417, part_dig:0.583, part_trad:0,
+      dv_pre:39.4,    dv_dig:57.09,   dv_trad:0,
+      rec_pre:18.0,   rec_dig:7.03,   rec_trad:0 },
+    { date:'14/05', label:'Corte 14/05',
+      cli_pre:128712,cli_dig:253961,cli_trad:0,
+      part_pre:0.336,part_dig:0.664,part_trad:0,
+      dv_pre:28.803,dv_dig:63.875,dv_trad:0,
+      rec_pre:13.354,rec_dig:13.162,rec_trad:0 },
+    { date:'20/05', label:'Corte 20/05',
+      cli_pre:283348,cli_dig:336723,cli_trad:0,
+      part_pre:0.457,part_dig:0.543,part_trad:0,
+      dv_pre:68.490,dv_dig:82.766,dv_trad:0,
+      rec_pre:34.274,rec_dig:23.827,rec_trad:0 },
+  ],
+};
+
+// ═══════════════════════════════════════════════════════════════════
+//  SEGUIMIENTO DATA — Corte 20/05/2026
+// ═══════════════════════════════════════════════════════════════════
 const ch=(cd,ct,ep,ed,et,dvp,dvd,dvt,rp,rd,rt)=>({cd,ct,ep,ed,et,dvp,dvd,dvt,rp,rd,rt});
 const N=null;
-
-// BCP data
 const BCP={
-  "1-120": ch(34804,26295,0.6452,0.4349,0.1234,117.986,51.611,147.424,76.130,22.448,18.197),
-  "t130":  ch(29324,12217,0.6452,0.4737,0.3994,117.986,46.751,24.904,76.130,22.148,9.947),
-  // Personas 1-30
-  "p130":  ch(24614,10901,0.6801,0.4236,0.3343,54.023,20.852,14.038,36.739,8.833,4.692),
-  "segA130":ch(10120,3744,0.4798,0.4673,0.5236,13.251,4.854,2.570,6.358,2.268,1.346),
-  "segA130-0-1k":  ch(3184,0,0.4707,0.3793,N,0.757,0.595,0,0.356,0.226,0),
-  "segA130-1k-5k": ch(3867,1784,0.4873,0.3736,0.4414,2.277,1.087,0.503,1.110,0.406,0.222),
-  "segA130-5k-20k":ch(1712,1143,0.4911,0.3864,0.4881,2.521,0.985,0.642,1.238,0.381,0.314),
-  "segA130-20k-300k":ch(1224,668,0.4633,0.5478,0.5337,5.286,1.737,0.907,2.449,0.952,0.484),
-  "segA130-300k":  ch(133,149,0.5000,0.6768,0.6298,2.410,0.449,0.518,1.205,0.304,0.327),
-  "segB130":ch(7106,4460,0.7488,0.4158,0.2772,40.335,13.280,9.387,30.203,5.522,2.603),
-  "segB130-0-1k":  ch(1261,0,0.8304,0.2793,N,1.396,0.859,0,1.159,0.240,0),
-  "segB130-1k-5k": ch(2461,211,0.7710,0.3089,0.1977,4.451,2.213,0.142,3.432,0.684,0.028),
-  "segB130-5k-20k":ch(1642,1807,0.7716,0.4393,0.2296,6.395,2.492,2.069,4.934,1.095,0.475),
-  "segB130-20k-300k":ch(1592,2184,0.7240,0.4472,0.2737,19.247,6.108,5.540,13.936,2.731,1.516),
-  "segB130-300k":  ch(150,258,0.7621,0.4803,0.3565,8.845,1.608,1.636,6.741,0.772,0.583),
-  "segC130":ch(5631,1171,0.6113,0.4846,0.4569,0.131,1.255,0.494,0.080,0.608,0.226),
-  "segC130-0-1k":  ch(2142,0,0.5683,0.4160,N,0.030,0.317,0,0.017,0.132,0),
-  "segC130-1k-5k": ch(3061,316,0.7448,0.4971,0.3571,0.040,0.701,0.086,0.030,0.349,0.031),
-  "segC130-5k-20k":ch(428,855,0.5459,0.5391,0.4779,0.061,0.237,0.408,0.033,0.128,0.195),
-  "segD130":ch(1757,1526,0.3195,0.2976,0.3266,0.307,1.463,1.586,0.098,0.435,0.518),
-  "segD130-0-1k":  ch(596,0,0.2132,0.2389,N,0.082,0.399,0,0.017,0.095,0),
-  "segD130-1k-5k": ch(769,318,0.3407,0.3139,0.2835,0.100,0.552,0.261,0.034,0.173,0.074),
-  "segD130-5k-20k":ch(392,1208,0.3720,0.3259,0.3351,0.125,0.511,1.325,0.046,0.167,0.444),
-  // Pyme 1-30
-  "py130": ch(4710,1316,0.6158,0.5141,0.4836,63.963,25.899,10.867,39.390,13.314,5.255),
-  "pyA130":ch(2385,198,0.5540,0.4327,0.7819,26.231,7.671,1.952,14.532,3.319,1.526),
-  "pyA130-0-1k":   ch(114,0,0.2840,0.1666,N,0.122,0.051,0,0.035,0.009,0),
-  "pyA130-1k-5k":  ch(445,0,0.4118,0.4162,N,0.665,0.318,0,0.274,0.132,0),
-  "pyA130-5k-20k": ch(687,0,0.4246,0.5102,N,1.865,0.908,0,0.792,0.463,0),
-  "pyA130-20k-300k":ch(1042,0,0.5857,0.4287,N,17.305,5.206,0,10.135,2.231,0),
-  "pyA130-300k":   ch(97,198,0.5253,0.4070,0.7819,6.275,1.189,1.952,3.297,0.484,1.526),
-  "pyB130":ch(1749,924,0.6652,0.5477,0.3927,37.067,17.412,8.119,24.658,9.537,3.188),
-  "pyB130-0-1k":   ch(6,0,0.9631,0.1127,N,0.057,0.004,0,0.055,0.000,0),
-  "pyB130-1k-5k":  ch(53,2,0.8518,0.3881,0,0.423,0.116,0.002,0.360,0.045,0),
-  "pyB130-5k-20k": ch(200,7,0.7188,0.4950,0.1083,2.269,0.882,0.021,1.631,0.437,0.002),
-  "pyB130-20k-300k":ch(1350,755,0.6745,0.5648,0.3479,23.985,12.762,5.586,16.178,7.208,1.943),
-  "pyB130-300k":   ch(140,160,0.6227,0.5061,0.4953,10.333,3.648,2.510,6.434,1.846,1.243),
-  "pyC130":ch(448,194,0.3181,0.6618,0.6786,0.624,0.596,0.796,0.198,0.394,0.540),
-  "pyC130-0-1k":   ch(30,0,0.4122,0.3720,N,0.002,0.009,0,0.001,0.003,0),
-  "pyC130-1k-5k":  ch(115,0,0.1991,0.5736,N,0.016,0.057,0,0.003,0.033,0),
-  "pyC130-5k-20k": ch(212,0,0.3041,0.6091,N,0.059,0.205,0,0.018,0.125,0),
-  "pyC130-20k-300k":ch(91,194,0.3227,0.7182,0.6786,0.546,0.325,0.796,0.176,0.234,0.540),
-  "pyD130":ch(128,0,0.0625,0.2922,N,0.042,0.219,0,0.003,0.064,0),
-  // 31-60
-  "t3160": ch(2920,1233,N,0.124,0.1406,0,1.95,35.93,0,0.20,5.05),
-  "p3160": ch(2906,7044,N,0.124,0.1296,0,1.76,21.30,0,0.19,2.76),
-  "p3160-0-1k":    ch(1396,819,N,0.1176,0.1471,0,0.51,0.34,0,0.06,0.05),
-  "p3160-1k-5k":   ch(1510,1863,N,0.1040,0.1024,0,1.25,1.27,0,0.13,0.13),
-  "p3160-5k-20k":  ch(0,2288,N,N,0.0782,0,0,5.50,0,0,0.43),
-  "p3160-20k-300k":ch(0,1871,N,N,0.1328,0,0,11.60,0,0,1.54),
-  "p3160-300k":    ch(0,203,N,N,0.2355,0,0,2.59,0,0,0.61),
-  "py3160":ch(14,1233,N,0.0526,0.1565,0,0.19,14.63,0,0.01,2.29),
-  // 61-90 & 91-120
-  "t6190": ch(1009,7421,0,0.0515,0.0531,0,0.97,41.79,0,0.05,2.22),
-  "t91120":ch(1551,5424,0,0.0258,0.0219,0,1.94,44.80,0,0.05,0.98),
-  // +120
-  "t121":  ch(7271,510303,0,0.00396,0.000742,0,2.181,10136.287,0,0.00863,7.525),
-  "t121-0-1k":ch(7271,156909,0,0.00396,0.00329,0,2.181,132.550,0,0.00863,0.436),
-  "t121-1k":  ch(0,353432,0,0,0.000709,0,0,10003.737,0,0,7.089),
+  "1-120":ch(48002,37866,0.6368,0.4891,0.1766,162.545,62.633,154.502,103.515,30.632,27.286),
+  "t130": ch(42136,15903,0.6368,0.5251,0.5035,162.545,57.464,31.350,103.515,30.172,15.786),
+  "p130": ch(35427,14177,0.6632,0.4712,0.4449,78.651,25.888,17.491,52.159,12.198,7.782),
+  "segA130":ch(12976,4872,0.4658,0.5782,0.6080,18.352,6.178,3.282,8.549,3.572,1.995),
+  "segA130-0-1k":  ch(4095,0,0.4445,0.4922,N,1.270,0.807,0,0.564,0.397,0),
+  "segA130-1k-5k": ch(5102,2371,0.4385,0.5115,0.5429,3.681,1.485,0.703,1.614,0.760,0.382),
+  "segA130-5k-20k":ch(2145,1540,0.4596,0.5289,0.5772,3.682,1.233,0.880,1.692,0.652,0.508),
+  "segA130-20k-300k":ch(1476,790,0.4662,0.6400,0.6183,6.791,2.115,1.088,3.166,1.353,0.673),
+  "segA130-300k":  ch(158,171,0.5165,0.7609,0.7089,2.928,0.538,0.610,1.513,0.410,0.433),
+  "segB130":ch(12743,5961,0.7631,0.4349,0.4016,55.866,16.287,11.617,42.631,7.083,4.665),
+  "segB130-0-1k":  ch(2230,0,0.8654,0.3592,N,2.254,1.215,0,1.951,0.436,0),
+  "segB130-1k-5k": ch(4144,238,0.8068,0.3622,0.2532,7.588,3.193,0.158,6.121,1.157,0.040),
+  "segB130-5k-20k":ch(2907,2748,0.7814,0.4408,0.3176,10.246,3.020,2.913,8.007,1.331,0.925),
+  "segB130-20k-300k":ch(3150,2677,0.7332,0.4622,0.3852,25.255,7.035,6.612,18.516,3.251,2.547),
+  "segB130-300k":  ch(312,298,0.7636,0.4975,0.5961,10.523,1.824,1.935,8.035,0.907,1.153),
+  "segC130":ch(7061,1388,0.3030,0.5494,0.5151,1.321,1.602,0.654,0.400,0.880,0.337),
+  "segC130-0-1k":  ch(2718,0,0.3723,0.5058,N,0.078,0.404,0,0.029,0.205,0),
+  "segC130-1k-5k": ch(3676,385,0.2767,0.5714,0.4482,0.201,0.892,0.119,0.056,0.510,0.053),
+  "segC130-5k-20k":ch(667,1003,0.2671,0.5429,0.5299,0.227,0.306,0.535,0.061,0.166,0.284),
+  "segC130-20k-300k":ch(N,N,0.2404,N,N,0.517,N,N,0.124,N,N),
+  "segD130":ch(2647,1956,0.1859,0.3640,0.4048,3.112,1.820,1.937,0.579,0.663,0.784),
+  "segD130-0-1k":  ch(919,0,0.2073,0.3367,N,0.124,0.526,0,0.026,0.177,0),
+  "segD130-1k-5k": ch(1118,451,0.2987,0.3965,0.3437,0.202,0.705,0.337,0.060,0.280,0.116),
+  "segD130-5k-20k":ch(610,1505,0.2248,0.3495,0.4177,0.350,0.590,1.600,0.079,0.206,0.668),
+  "py130": ch(6709,1726,0.6122,0.5692,0.5775,83.893,31.576,13.860,51.356,17.974,8.004),
+  "pyA130":ch(3384,445,0.5719,0.5192,0.7691,33.830,9.827,3.515,19.349,5.103,2.704),
+  "pyA130-0-1k":   ch(236,0,0.3359,0.2298,N,0.189,0.118,0,0.064,0.027,0),
+  "pyA130-1k-5k":  ch(776,2,0.4536,0.3762,0.0041,1.018,0.564,0.005,0.462,0.212,0),
+  "pyA130-5k-20k": ch(971,2,0.4551,0.5465,0.0065,2.703,1.245,0.003,1.230,0.681,0),
+  "pyA130-20k-300k":ch(1289,203,0.6027,0.5313,0.7326,22.236,6.527,0.953,13.401,3.468,0.698),
+  "pyA130-300k":   ch(112,238,0.5456,0.5207,0.7852,7.683,1.372,2.554,4.192,0.715,2.006),
+  "pyB130":ch(2620,1042,0.6811,0.5912,0.4945,45.959,20.660,9.362,31.305,12.215,4.629),
+  "pyB130-0-1k":   ch(6,0,0.9655,0.1127,N,0.085,0.004,0,0.082,0,0),
+  "pyB130-1k-5k":  ch(57,2,0.8531,0.5727,1.000,0.630,0.121,0.002,0.537,0.069,0.002),
+  "pyB130-5k-20k": ch(237,8,0.7291,0.6062,0.2909,3.163,1.062,0.024,2.306,0.644,0.007),
+  "pyB130-20k-300k":ch(2058,853,0.6894,0.6000,0.4397,29.821,15.303,6.419,20.559,9.183,2.822),
+  "pyB130-300k":   ch(262,179,0.6379,0.5562,0.6163,12.261,4.170,2.918,7.821,2.319,1.799),
+  "pyC130":ch(561,236,0.2173,0.6542,0.6803,1.324,0.826,0.982,0.288,0.540,0.668),
+  "pyC130-0-1k":   ch(35,0,0.4397,0.5457,N,0.003,0.011,0,0.001,0.006,0),
+  "pyC130-1k-5k":  ch(146,2,0.2703,0.5777,0,0.027,0.083,0.001,0.007,0.048,0),
+  "pyC130-5k-20k": ch(257,5,0.2989,0.6132,0,0.100,0.269,0.005,0.030,0.165,0),
+  "pyC130-20k-300k":ch(123,229,0.3307,0.6945,0.6844,0.755,0.462,0.976,0.250,0.321,0.668),
+  "pyD130":ch(144,3,0.1492,0.4397,0,2.779,0.263,0,0.415,0.116,0.003),
+  "t3160": ch(3223,8591,N,0.1383,0.1882,0,2.130,36.589,0,0.295,6.886),
+  "p3160": ch(3186,7324,N,0.1491,0.1806,N,1.869,21.758,0,0.279,3.929),
+  "p3160-0-1k":    ch(1457,842,N,0.1853,0.2036,N,0.532,0.353,N,0.099,0.072),
+  "p3160-1k-5k":   ch(1729,1893,N,0.1347,0.1480,N,1.338,1.307,N,0.180,0.194),
+  "p3160-5k-20k":  ch(0,2393,N,N,0.1072,N,0,5.639,N,0,0.605),
+  "p3160-20k-300k":ch(0,1986,N,N,0.1850,N,0,11.831,N,0,2.189),
+  "p3160-300k":    ch(0,210,N,N,0.3310,N,0,2.628,N,0,0.870),
+  "py3160":ch(37,1267,N,0.0608,0.1994,N,0.261,14.831,0,0.016,2.957),
+  "t6190": ch(1047,7703,0,0.0892,0.0763,0,1.099,41.843,N,0.098,3.191),
+  "t91120":ch(1596,5669,0,0.0351,0.0318,0,1.940,44.720,N,0.068,1.423),
+  "t121":  ch(7271,510311,0,0.007236,0.001240,0,2.2,10136.792,0,0.2,12.565),
+  "t121-0-1k":ch(7271,156825,0,0.007236,0.005237,0,2.2,132.534,0,0.2,0.694),
+  "t121-1k":  ch(0,353486,0,0,0.001187,0,0,10004.258,0,0,11.871),
 };
-
-// YAPE data — todo digital, 100%
+BCP["py3160"].noDig=true;
 const YAPE={
-  "1-120": {cd:253961,ct:0,ep:N,ed:0.2061,et:0,dvp:N,dvd:63.876,dvt:0,rp:N,rd:13.162,rt:0},
-  "t130":  {cd:152965,ct:0,ep:0.4637,ed:0.3730,et:0.38,dvp:28.803,dvd:28.841,dvt:0,rp:13.354,rd:10.757,rt:0,
-    sub:[{l:'P1+P2',cd:82684,ed:0.3268,dvd:20.240,rd:6.615},{l:'P3',cd:33616,ed:0.4486,dvd:4.751,rd:2.131},{l:'P4+P5',cd:36665,ed:0.5220,dvd:3.850,rd:2.010}]},
-  "t3160": {cd:49221,ct:0,ep:0,ed:0.1119,et:0.11,dvp:0,dvd:12.772,dvt:0,rp:0,rd:1.430,rt:0,
-    sub:[{l:'P1+P2',cd:14612,ed:0.0780,dvd:6.742,rd:0.526},{l:'P3',cd:8664,ed:0.1287,dvd:1.996,rd:0.257},{l:'P4+P5',cd:25945,ed:0.1603,dvd:4.035,rd:0.647}]},
-  "t6190": {cd:31146,ct:0,ep:0,ed:0.0544,et:0.039,dvp:0,dvd:11.425,dvt:0,rp:0,rd:0.621,rt:0,
-    sub:[{l:'P1+P2',cd:12282,ed:0.0396,dvd:7.747,rd:0.307},{l:'P3',cd:8234,ed:0.0704,dvd:2.000,rd:0.141},{l:'P4+P5',cd:10630,ed:0.1036,dvd:1.678,rd:0.174}]},
-  "t91120":{cd:20629,ct:0,ep:0,ed:0.0327,et:0.02,dvp:0,dvd:10.837,dvt:0,rp:0,rd:0.354,rt:0,
-    sub:[{l:'P1+P2',cd:7278,ed:0.0233,dvd:6.906,rd:0.161},{l:'P3',cd:4209,ed:0.0506,dvd:1.362,rd:0.069},{l:'P4+P5',cd:9142,ed:0.0485,dvd:2.569,rd:0.125}]},
+  "1-120":{cd:336723,ct:0,ep:0,ed:0.1670,et:0,dvp:0,dvd:82.766,dvt:0,rp:0,rd:23.827,rt:0},
+  "t130": {cd:336723,ct:0,ep:0,ed:0.431,et:0,dvp:0,dvd:82.766,dvt:0,rp:0,rd:23.827,rt:0,
+    sub:[{l:'P1+P2',cd:N,ed:N,dvd:N,rd:N},{l:'P3',cd:N,ed:N,dvd:N,rd:N},{l:'P4+P5',cd:N,ed:N,dvd:N,rd:N}]},
+  "t3160": {cd:49221,ct:0,ep:0,ed:0.152,et:0,dvp:0,dvd:12.772,dvt:0,rp:0,rd:1.430,rt:0},
+  "t6190": {cd:31146,ct:0,ep:0,ed:0.076,et:0,dvp:0,dvd:11.425,dvt:0,rp:0,rd:0.621,rt:0},
+  "t91120":{cd:20629,ct:0,ep:0,ed:0.047,et:0,dvp:0,dvd:10.837,dvt:0,rp:0,rd:0.354,rt:0},
 };
 
-// ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  STATE
-// ═══════════════════════════════════════════════════════════════
-let entity='bcp', currentView='total', chartInstances=[];
+// ═══════════════════════════════════════════════════════════════════
+let indEntity='general';
+let segEntity='bcp', currentView='total';
+let chartInstances=[];
+const CF="'Plus Jakarta Sans',sans-serif";
+const CTRAD='rgba(100,116,139,.35)';
+const CPRE='#7c3aed';
+function entColor(e){return e==='yape'?'#e0500a':'#1a5fd4';}
 
-// ═══════════════════════════════════════════════════════════════
-//  ENTITY SWITCH
-// ═══════════════════════════════════════════════════════════════
-function setEntity(e){
-  entity=e;
-  document.getElementById('tab-bcp').className='ent-tab bcp'+(e==='bcp'?' active':'');
-  document.getElementById('tab-yape').className='ent-tab yape'+(e==='yape'?' active':'');
-  document.getElementById('hdrLogo').className='hdr-logo '+e;
-  document.getElementById('hdrTitle').textContent='Cobranza Digital · '+(e==='bcp'?'BCP':'Yape');
-  // +120 group only for BCP
-  ['plus120-group','nav-plus120-item'].forEach(id=>{
-    document.getElementById(id).style.display=e==='yape'?'none':'';
-  });
-  // If on a BCP-only view, go to total
-  if(e==='yape'&&(currentView.startsWith('t121')||currentView.startsWith('py')||currentView.startsWith('seg')||currentView.startsWith('pyA')||currentView.startsWith('pyB')||currentView.startsWith('pyC'))){
+// ═══════════════════════════════════════════════════════════════════
+//  MAIN PAGE SWITCH
+// ═══════════════════════════════════════════════════════════════════
+function showPage(p){
+  document.querySelectorAll('.page').forEach(el=>el.classList.remove('active'));
+  document.querySelectorAll('.main-tab').forEach(el=>el.classList.remove('active'));
+  document.getElementById('page-'+p).classList.add('active');
+  document.getElementById('tab-'+p).classList.add('active');
+  if(p==='seg'&&!document.getElementById('rightPanel').innerHTML){
     navigate('total');
-  } else {
-    navigate(currentView);
+    document.getElementById('nav-total').classList.add('active-bcp');
   }
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  DRAWER / NAV
-// ═══════════════════════════════════════════════════════════════
-function toggleDrawer(){const p=document.getElementById('leftPanel'),o=document.getElementById('drawerOverlay'),h=document.getElementById('hamburger'),open=!p.classList.contains('open');[p,o,h].forEach(el=>el.classList.toggle('open',open));}
-function closeDrawer(){['leftPanel','drawerOverlay','hamburger'].forEach(id=>document.getElementById(id).classList.remove('open'));}
-function navAndClose(v){navigate(v);if(window.innerWidth<=900)closeDrawer();}
-function clearActive(){document.querySelectorAll('.tramo-btn,.sub-btn,.ss-btn,.sss-btn').forEach(b=>b.classList.remove('active-bcp','active-yape'));}
-function toggleT(id){const s=document.getElementById('sub-'+id),b=document.getElementById('nav-'+id);if(!s)return;s.classList.toggle('open');if(b)b.classList.toggle('expanded',s.classList.contains('open'));}
-function toggleSub(id){const s=document.getElementById('sub-'+id);if(s)s.classList.toggle('open');}
-function toggleSS(id){const s=document.getElementById('sub-'+id);if(s)s.classList.toggle('open');}
-function destroyCharts(){chartInstances.forEach(c=>c.destroy());chartInstances=[];}
-function navigate(view){
-  currentView=view;clearActive();destroyCharts();
-  const el=document.getElementById('nav-'+view);
-  if(el)el.classList.add('active-'+entity);
-  document.getElementById('rightPanel').scrollTop=0;
-  renderView(view);
-}
-
-// ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 //  FORMAT
-// ═══════════════════════════════════════════════════════════════
+// ═══════════════════════════════════════════════════════════════════
 const fmt={
   num:v=>v==null?'—':Math.round(v).toLocaleString('es-PE'),
   pct:v=>v==null?'—':(v*100).toFixed(1)+'%',
-  mm: v=>v==null?'—':'S/ '+v.toFixed(2)+' MM',
+  mm: v=>v==null?'—':v<0.1&&v>0?'S/ '+(v*1000).toFixed(1)+' K':v<1000?'S/ '+v.toFixed(2)+' MM':'S/ '+(v/1000).toFixed(1)+' B',
+  mmS:v=>v==null?'—':v<0.1&&v>0?'S/'+(v*1000).toFixed(1)+'K':v<1000?'S/'+v.toFixed(1):'S/'+(v/1000).toFixed(1)+'B',
 };
 const isZ=v=>v==null||v===0;
-const CTRAD='rgba(100,116,139,.35)';
-const CF="'Plus Jakarta Sans',sans-serif";
-const CENT=entity=>'bcp'?'#1a5fd4':'#e0500a';
+function deltaArrow(cur,prev,higher_is_good=true){
+  if(prev==null||prev===0)return{sym:'—',cls:'flat'};
+  const pct=((cur-prev)/Math.abs(prev)*100);
+  const up=pct>0;
+  const good=higher_is_good?up:!up;
+  return{sym:(up?'▲':'▼')+' '+Math.abs(pct).toFixed(1)+'%', cls:good?'up':'down'};
+}
 
-function entColor(){return entity==='bcp'?'#1a5fd4':'#e0500a';}
-function entPale(){return entity==='bcp'?'rgba(26,95,212,.08)':'rgba(224,80,10,.08)';}
-
-// ── WIN/LOSS ──
+// ═══════════════════════════════════════════════════════════════════
+//  WIN/LOSS
+// ═══════════════════════════════════════════════════════════════════
 function wlCalc(dig,trad){if(dig==null||trad==null||isZ(dig)||isZ(trad))return null;return+((dig-trad)*100).toFixed(2);}
 function wlPill(dig,trad,noDig){
-  if(noDig)return'<span class="pill na">Sin participación Dig.</span>';
-  const v=wlCalc(dig,trad);
-  if(v==null)return'<span class="pill na">N/D</span>';
+  if(noDig)return'<span class="pill na">Sin part. Dig.</span>';
+  const v=wlCalc(dig,trad);if(v==null)return'<span class="pill na">N/D</span>';
   const s=v>0?'+':'';
   if(v>0.05)return`<span class="pill win">▲ ${s}${v.toFixed(1)} pp</span>`;
   if(v<-0.05)return`<span class="pill loss">▼ ${v.toFixed(1)} pp</span>`;
   return'<span class="pill tie">= 0 pp</span>';
 }
 function wlBanner(dig,trad,label,noDig){
-  if(noDig)return`<div class="wl-banner nodig an an1"><span class="wl-icon">🚫</span><span class="wl-text">Digital <strong>no participa</strong> en <strong>${label||'este segmento'}</strong> · Solo Tradicional</span></div>`;
-  const v=wlCalc(dig,trad);
-  if(v==null)return'';
+  if(noDig)return`<div class="wl-banner nodig an an1"><span class="wl-icon">🚫</span><span class="wl-text">Digital <strong>no participa</strong> en <strong>${label||'este segmento'}</strong></span></div>`;
+  const v=wlCalc(dig,trad);if(v==null)return'';
   const s=v>0?'+':'',w=label?`<strong>${label}</strong> ·`:'·';
   if(v>0.05)return`<div class="wl-banner win an an1"><span class="wl-icon">✅</span><span class="wl-text">Digital gana ${w} efectividad vs Tradicional</span><span class="wl-diff">${s}${v.toFixed(1)} pp</span></div>`;
   if(v<-0.05)return`<div class="wl-banner loss an an1"><span class="wl-icon">⚠️</span><span class="wl-text">Digital pierde ${w} efectividad vs Tradicional</span><span class="wl-diff">${v.toFixed(1)} pp</span></div>`;
@@ -546,44 +704,455 @@ function wlBanner(dig,trad,label,noDig){
 }
 function noPre(){return`<div class="no-pre an an1"><span>ℹ️</span>Sin participación de Pre-gestión en este tramo</div>`;}
 
-// ═══════════════════════════════════════════════════════════════
-//  KPI DONUT SECTION
-// ═══════════════════════════════════════════════════════════════
-function kpiSection(d,hasPre,isYape){
-  const col={pre:'#7c3aed',dig:entColor(),trad:'#94a3b8'};
-  // For Yape: only digital exists
+// ═══════════════════════════════════════════════════════════════════
+//  ██████████  INDICADORES PAGE  ██████████
+// ═══════════════════════════════════════════════════════════════════
+function setIndEntity(e){
+  indEntity=e;
+  ['general','bcp','b120','yape'].forEach(x=>{
+    const el=document.getElementById('ieb-'+x);
+    if(!el)return;
+    el.classList.toggle('active',x===e);
+    if(x==='general'){el.style.background=e==='general'?'rgba(107,114,128,.12)':'linear-gradient(135deg,rgba(26,95,212,.08),rgba(224,80,10,.08))';el.style.borderColor=e==='general'?'#374151':'#6b7280';el.style.color=e==='general'?'#111827':'#374151';}
+  });
+  renderIndicadores();
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  GENERAL VIEW — consolidado de todas las entidades
+// ═══════════════════════════════════════════════════════════════════
+function renderGeneralInd(){
+  const dates=['07/05','14/05','20/05'];
+  // Build consolidated totals per corte: Pre + Dig + Trad across BCP Activa + BCP +120 + Yape
+  const consolidated=dates.map((_,i)=>{
+    const bcp=IND.bcp[i], b120=IND.b120[i], yape=IND.yape[i];
+    return{
+      date:dates[i],
+      cli_pre: bcp.cli_pre+b120.cli_pre+yape.cli_pre,
+      cli_dig: bcp.cli_dig+b120.cli_dig+yape.cli_dig,
+      cli_trad:bcp.cli_trad+b120.cli_trad+yape.cli_trad,
+      dv_pre:  bcp.dv_pre+b120.dv_pre+yape.dv_pre,
+      dv_dig:  bcp.dv_dig+b120.dv_dig+yape.dv_dig,
+      dv_trad: bcp.dv_trad+b120.dv_trad+yape.dv_trad,
+      rec_pre: bcp.rec_pre+b120.rec_pre+yape.rec_pre,
+      rec_dig: bcp.rec_dig+b120.rec_dig+yape.rec_dig,
+      rec_trad:bcp.rec_trad+b120.rec_trad+yape.rec_trad,
+      // by entity for breakdown
+      entities:{
+        'BCP Activa':{cli_pre:bcp.cli_pre,cli_dig:bcp.cli_dig,cli_trad:bcp.cli_trad,part_dig:bcp.part_dig,part_trad:bcp.part_trad,part_pre:bcp.part_pre,dv_dig:bcp.dv_dig,dv_trad:bcp.dv_trad,rec_dig:bcp.rec_dig,rec_trad:bcp.rec_trad,col:'#1a5fd4'},
+        'BCP +120': {cli_pre:b120.cli_pre,cli_dig:b120.cli_dig,cli_trad:b120.cli_trad,part_dig:b120.part_dig,part_trad:b120.part_trad,part_pre:0,dv_dig:b120.dv_dig,dv_trad:b120.dv_trad,rec_dig:b120.rec_dig,rec_trad:b120.rec_trad,col:'#7c3aed'},
+        'Yape':     {cli_pre:yape.cli_pre,cli_dig:yape.cli_dig,cli_trad:yape.cli_trad,part_dig:yape.part_dig,part_trad:yape.part_trad,part_pre:yape.part_pre,dv_dig:yape.dv_dig,dv_trad:yape.dv_trad,rec_dig:yape.rec_dig,rec_trad:yape.rec_trad,col:'#e0500a'},
+      }
+    };
+  });
+
+  const latest=consolidated[2], prev=consolidated[1];
+  const totCli=latest.cli_pre+latest.cli_dig+latest.cli_trad;
+  const partPre=totCli>0?latest.cli_pre/totCli:0;
+  const partDig=totCli>0?latest.cli_dig/totCli:0;
+  const partTrad=totCli>0?latest.cli_trad/totCli:0;
+
+  // Delta cards
+  const deltaHtml=`<div class="delta-grid an">
+    <div class="delta-card bcp">
+      <div class="delta-label">Clientes Totales</div>
+      <div class="delta-val" style="color:#374151;">${Math.round(totCli).toLocaleString('es-PE')}</div>
+      <div class="delta-sub">Pre + Digital + Tradicional</div>
+      <div class="delta-change"><span class="delta-arrow up">▲ ${(((totCli-(consolidated[1].cli_pre+consolidated[1].cli_dig+consolidated[1].cli_trad))/Math.abs(consolidated[1].cli_pre+consolidated[1].cli_dig+consolidated[1].cli_trad))*100).toFixed(1)}%</span><span class="delta-vs">vs 14/05</span></div>
+      <div class="canal-mini">
+        <div class="canal-mini-row"><div class="canal-mini-label"><span class="canal-mini-dot" style="background:#7c3aed"></span>Pre</div><span class="canal-mini-val">${Math.round(latest.cli_pre).toLocaleString('es-PE')}</span><span class="canal-mini-pct">${(partPre*100).toFixed(0)}%</span></div>
+        <div class="canal-mini-row"><div class="canal-mini-label"><span class="canal-mini-dot" style="background:#1a5fd4"></span>Digital</div><span class="canal-mini-val">${Math.round(latest.cli_dig).toLocaleString('es-PE')}</span><span class="canal-mini-pct">${(partDig*100).toFixed(0)}%</span></div>
+        <div class="canal-mini-row"><div class="canal-mini-label"><span class="canal-mini-dot" style="background:#94a3b8"></span>Tradicional</div><span class="canal-mini-val">${Math.round(latest.cli_trad).toLocaleString('es-PE')}</span><span class="canal-mini-pct">${(partTrad*100).toFixed(0)}%</span></div>
+      </div>
+    </div>
+    <div class="delta-card bcp">
+      <div class="delta-label">Clientes Digitales</div>
+      <div class="delta-val">${Math.round(latest.cli_dig).toLocaleString('es-PE')}</div>
+      <div class="delta-sub">Participación ${(partDig*100).toFixed(1)}% del total</div>
+      <div class="delta-change"><span class="delta-arrow up">▲ ${(((latest.cli_dig-prev.cli_dig)/prev.cli_dig)*100).toFixed(1)}%</span><span class="delta-vs">vs 14/05</span></div>
+      <div class="canal-mini">
+        ${Object.entries(latest.entities).map(([k,v])=>`<div class="canal-mini-row"><div class="canal-mini-label"><span class="canal-mini-dot" style="background:${v.col}"></span>${k}</div><span class="canal-mini-val">${Math.round(v.cli_dig).toLocaleString('es-PE')}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="delta-card bcp">
+      <div class="delta-label">Deuda Vencida Digital</div>
+      <div class="delta-val">${fmt.mm(latest.dv_dig)}</div>
+      <div class="delta-sub" style="display:flex;flex-direction:column;gap:2px;">
+        <span>Total DV: <strong>${fmt.mm(latest.dv_dig+latest.dv_trad+latest.dv_pre)}</strong></span>
+        <span style="color:var(--bcp);font-weight:600;">Digital = ${((latest.dv_dig/(latest.dv_dig+latest.dv_trad+latest.dv_pre))*100).toFixed(1)}% del total</span>
+        <span>Trad: ${fmt.mm(latest.dv_trad)}</span>
+      </div>
+      <div class="delta-change"><span class="delta-arrow ${latest.dv_dig>prev.dv_dig?'up':'down'}">${latest.dv_dig>prev.dv_dig?'▲':'▼'} ${Math.abs(((latest.dv_dig-prev.dv_dig)/prev.dv_dig)*100).toFixed(1)}% vs 14/05</span></div>
+      <div class="canal-mini">
+        ${Object.entries(latest.entities).map(([k,v])=>`<div class="canal-mini-row"><div class="canal-mini-label"><span class="canal-mini-dot" style="background:${v.col}"></span>${k}</div><span class="canal-mini-val">${fmt.mmS(v.dv_dig)}</span></div>`).join('')}
+      </div>
+    </div>
+    <div class="delta-card bcp">
+      <div class="delta-label">Recupero Digital</div>
+      <div class="delta-val">${fmt.mm(latest.rec_dig)}</div>
+      <div class="delta-sub" style="display:flex;flex-direction:column;gap:2px;">
+        <span>Total Rec.: <strong>${fmt.mm(latest.rec_dig+latest.rec_trad+latest.rec_pre)}</strong></span>
+        <span style="color:var(--bcp);font-weight:600;">Digital = ${((latest.rec_dig/(latest.rec_dig+latest.rec_trad+latest.rec_pre))*100).toFixed(1)}% del total</span>
+        <span>Trad: ${fmt.mm(latest.rec_trad)}</span>
+      </div>
+      <div class="delta-change"><span class="delta-arrow up">▲ ${(((latest.rec_dig-prev.rec_dig)/prev.rec_dig)*100).toFixed(1)}%</span><span class="delta-vs">vs 14/05</span></div>
+      <div class="canal-mini">
+        ${Object.entries(latest.entities).map(([k,v])=>`<div class="canal-mini-row"><div class="canal-mini-label"><span class="canal-mini-dot" style="background:${v.col}"></span>${k}</div><span class="canal-mini-val">${fmt.mmS(v.rec_dig)}</span></div>`).join('')}
+      </div>
+    </div>
+  </div>`;
+
+  // Breakdown by entity per corte (table)
+  const entityRows=Object.entries(latest.entities).map(([k,v])=>`
+    <tr onclick="setIndEntity(${k==='BCP Activa'?'\'bcp\'':k==='BCP +120'?'\'b120\'':'\'yape\''})" style="cursor:pointer;">
+      <td><span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:${v.col};margin-right:6px;"></span>${k}</td>
+      <td>${Math.round(v.cli_pre).toLocaleString('es-PE')}</td>
+      <td><span class="pill bcp">${Math.round(v.cli_dig).toLocaleString('es-PE')}</span></td>
+      <td>${Math.round(v.cli_trad).toLocaleString('es-PE')}</td>
+      <td><span class="pill bcp">${(v.part_dig*100).toFixed(1)}%</span></td>
+      <td>${(v.part_pre*100).toFixed(1)}%</td>
+      <td>${(v.part_trad*100).toFixed(1)}%</td>
+      <td>${fmt.mm(v.dv_dig)}</td>
+      <td>${fmt.mm(v.dv_trad)}</td>
+      <td>${fmt.mm(v.rec_dig)}</td>
+      <td>${fmt.mm(v.rec_trad)}</td>
+    </tr>`).join('');
+
+  document.getElementById('ind-content').innerHTML=`
+    <div class="ind-section-title" style="color:#374151;">📊 Vista General Consolidada</div>
+    <div class="ind-section-sub">BCP Activa + BCP +120 + Yape · Corte 20/05/2026 · Toca una fila para hacer zoom</div>
+    ${deltaHtml}
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;" class="an an2">
+      <div class="trend-card" style="grid-column:1/2;">
+        <div class="trend-title">Clientes Totales · Pre-gestión · Digital · Tradicional</div>
+        <div class="trend-sub">Consolidado BCP Activa + BCP +120 + Yape · Por canal · 3 cortes</div>
+        <canvas id="genCli" height="150"></canvas>
+      </div>
+      <div class="trend-card" style="grid-column:2/3;">
+        <div class="trend-title">Clientes por Tramo · Digital vs Tradicional</div>
+        <div class="trend-sub">BCP Activa · Corte 20/05 · Pre-gestión · Digital · Tradicional</div>
+        <canvas id="genTramo" height="150"></canvas>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px;" class="an an3">
+      <div class="trend-card">
+        <div class="trend-title">Deuda Vencida · Digital vs Tradicional</div>
+        <div class="trend-sub">BCP Activa · Yape · S/ MM · 3 cortes</div>
+        <canvas id="genDV" height="150"></canvas>
+      </div>
+      <div class="trend-card">
+        <div class="trend-title">Recupero · Digital vs Tradicional</div>
+        <div class="trend-sub">BCP Activa · Yape · S/ MM · 3 cortes</div>
+        <canvas id="genRec" height="150"></canvas>
+      </div>
+    </div>
+    <div class="corte-table-wrap an an4">
+      <div class="corte-table-hdr"><div class="corte-table-title">Desglose por Entidad · Corte 20/05 · Toca fila → zoom</div></div>
+      <div class="corte-scroll"><table class="corte-table">
+        <thead><tr>
+          <th>Entidad</th>
+          <th class="th-pre">Cli Pre</th><th class="th-dig">Cli Dig</th><th>Cli Trad</th>
+          <th class="th-dig">Part. Dig</th><th class="th-pre">Part. Pre</th><th>Part. Trad</th>
+          <th class="th-dig">DV Dig</th><th>DV Trad</th>
+          <th class="th-dig">Rec Dig</th><th>Rec Trad</th>
+        </tr></thead>
+        <tbody>${entityRows}</tbody>
+      </table></div>
+    </div>`;
+
+  destroyCharts();
+  requestAnimationFrame(()=>{
+    const baseOpts={responsive:true,maintainAspectRatio:true,aspectRatio:2.1,plugins:{legend:{position:'bottom',labels:{font:{family:CF,size:11,weight:'600'},color:'#374151',boxWidth:10,boxHeight:2,padding:12,usePointStyle:true}},tooltip:{backgroundColor:'#fff',titleColor:'#111827',bodyColor:'#374151',borderColor:'#e2e7ef',borderWidth:1,padding:9,titleFont:{family:CF,size:12,weight:'700'},bodyFont:{family:'JetBrains Mono',size:11}}},scales:{x:{grid:{display:false},ticks:{font:{family:CF,size:11,weight:'600'},color:'#374151'}},y:{grid:{color:'#f0f2f5'},ticks:{font:{family:'JetBrains Mono',size:10},color:'#6b7280'},border:{dash:[4,4]}}}};
+    const numFmt=v=>v>=1000?(v/1000).toFixed(0)+'K':v;
+    const stackedOpts={...baseOpts,scales:{...baseOpts.scales,x:{...baseOpts.scales.x,stacked:true},y:{...baseOpts.scales.y,stacked:true,ticks:{...baseOpts.scales.y.ticks,callback:numFmt}}}};
+
+    // ── CHART 1: Clientes apilado Pre/Dig/Trad · 3 cortes ──
+    new Chart(document.getElementById('genCli').getContext('2d'),{type:'bar',
+      data:{labels:dates,datasets:[
+        {label:'Pre-gestión',data:consolidated.map(d=>Math.round(d.cli_pre)), backgroundColor:'#7c3aed',stack:'s',borderSkipped:false,borderRadius:0},
+        {label:'Digital',    data:consolidated.map(d=>Math.round(d.cli_dig)),  backgroundColor:'#1a5fd4',stack:'s',borderSkipped:false,borderRadius:0},
+        {label:'Tradicional',data:consolidated.map(d=>Math.round(d.cli_trad)), backgroundColor:'rgba(100,116,139,.5)',stack:'s',borderSkipped:false,borderRadius:4},
+      ]},
+      options:stackedOpts});
+
+    // ── CHART 2: Clientes por tramo BCP Activa · Pre/Dig/Trad ──
+    // Datos del corte 20/05 desde BCP seguimiento
+    const tramos=['1–30','31–60','61–90','91–120','+120'];
+    const tramoKeys=['t130','t3160','t6190','t91120','t121'];
+    // Pre-gestión por tramo viene de IND.bcp último corte estructurado por tramo
+    // Usamos BCP seguimiento para dig/trad, IND para pre aproximado por tramo
+    const prePorTramo=[116882,0,0,0,0]; // pre solo existe en 1-30 y total
+    const digPorTramo=tramoKeys.map(k=>BCP[k]?Math.round(BCP[k].cd||0):0);
+    const tradPorTramo=tramoKeys.map(k=>BCP[k]?Math.round(BCP[k].ct||0):0);
+    new Chart(document.getElementById('genTramo').getContext('2d'),{type:'bar',
+      data:{labels:tramos,datasets:[
+        {label:'Pre-gestión',data:prePorTramo, backgroundColor:'#7c3aed',stack:'s',borderSkipped:false,borderRadius:0},
+        {label:'Digital',    data:digPorTramo,  backgroundColor:'#1a5fd4',stack:'s',borderSkipped:false,borderRadius:0},
+        {label:'Tradicional',data:tradPorTramo, backgroundColor:'rgba(100,116,139,.5)',stack:'s',borderSkipped:false,borderRadius:4},
+      ]},
+      options:{...stackedOpts,plugins:{...stackedOpts.plugins,tooltip:{...stackedOpts.plugins.tooltip,callbacks:{label:c=>` ${c.dataset.label}: ${numFmt(c.parsed.y)}`}}}}});
+
+    // ── CHART 3: DV Dig vs Trad ──
+    new Chart(document.getElementById('genDV').getContext('2d'),{type:'line',data:{labels:dates,datasets:[
+      {label:'BCP Dig',  data:IND.bcp.map(d=>+d.dv_dig.toFixed(2)),  borderColor:'#1a5fd4',backgroundColor:'rgba(26,95,212,.07)',borderWidth:2.5,fill:true, tension:0.35,pointRadius:4,pointHoverRadius:7},
+      {label:'BCP Trad', data:IND.bcp.map(d=>+d.dv_trad.toFixed(2)), borderColor:'#1a5fd4',backgroundColor:'transparent',        borderWidth:1.8,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[6,3]},
+      {label:'Yape Dig', data:IND.yape.map(d=>+d.dv_dig.toFixed(2)), borderColor:'#e0500a',backgroundColor:'rgba(224,80,10,.07)',borderWidth:2.5,fill:true, tension:0.35,pointRadius:4,pointHoverRadius:7},
+    ]},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,ticks:{...baseOpts.scales.y.ticks,callback:v=>'S/'+v}}}}});
+
+    // ── CHART 4: Recupero Dig vs Trad ──
+    new Chart(document.getElementById('genRec').getContext('2d'),{type:'line',data:{labels:dates,datasets:[
+      {label:'BCP Dig',  data:IND.bcp.map(d=>+d.rec_dig.toFixed(2)),  borderColor:'#1a5fd4',backgroundColor:'rgba(26,95,212,.07)',borderWidth:2.5,fill:true, tension:0.35,pointRadius:4,pointHoverRadius:7},
+      {label:'BCP Trad', data:IND.bcp.map(d=>+d.rec_trad.toFixed(2)), borderColor:'#1a5fd4',backgroundColor:'transparent',        borderWidth:1.8,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[6,3]},
+      {label:'Yape Dig', data:IND.yape.map(d=>+d.rec_dig.toFixed(2)), borderColor:'#e0500a',backgroundColor:'rgba(224,80,10,.07)',borderWidth:2.5,fill:true, tension:0.35,pointRadius:4,pointHoverRadius:7},
+      {label:'Yape Trad',data:IND.yape.map(d=>+d.rec_trad.toFixed(2)),borderColor:'#e0500a',backgroundColor:'transparent',        borderWidth:1.8,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[6,3]},
+    ]},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,ticks:{...baseOpts.scales.y.ticks,callback:v=>'S/'+v}}}}});
+  });
+}
+
+function renderIndicadores(){
+  if(indEntity==='general'){renderGeneralInd();return;}
+  const e=indEntity;
+  const data=IND[e];
+  const col=e==='yape'?'#e0500a':e==='b120'?'#7c3aed':'#1a5fd4';
+  const colClass=e==='yape'?'yape':e==='b120'?'b120':'bcp';
+  const labels={bcp:'BCP Activa',b120:'BCP +120',yape:'Yape'};
+  const latest=data[data.length-1];
+  const prev=data[data.length-2];
+  const dates=data.map(d=>d.date);
+  const hasPreData=data.some(d=>d.cli_pre>0);
+  const isYapeOrB120=false; // always show trad columns
+
+  // ── DELTA CARDS ──
   const metrics=[
-    {id:'dc',title:'Clientes',    k:'cd',kt:'ct',kp:null, fmt:v=>Math.round(v).toLocaleString('es-PE'), tot:d.cd+(d.ct||0)},
-    {id:'dd',title:'Deuda Vencida',k:'dvd',kt:'dvt',kp:'dvp',fmt:v=>'S/'+v.toFixed(1),tot:(d.dvd||0)+(d.dvt||0)+(hasPre?d.dvp||0:0)},
-    {id:'dr',title:'Recupero',    k:'rd',kt:'rt',kp:'rp', fmt:v=>'S/'+v.toFixed(1),tot:(d.rd||0)+(d.rt||0)+(hasPre?d.rp||0:0)},
+    {key:'cli',label:'Clientes Digitales',
+     val:fmt.num(latest.cli_dig),
+     sub:`Corte ${latest.date}`,
+     delta:deltaArrow(latest.cli_dig,prev.cli_dig,true),
+     canals:[
+       hasPreData?{l:'Pre-gestión',col:CPRE,v:latest.cli_pre,pct:latest.part_pre}:null,
+       {l:'Digital',col:col,v:latest.cli_dig,pct:latest.part_dig},
+       !isZ(latest.cli_trad)?{l:'Tradicional',col:'#94a3b8',v:latest.cli_trad,pct:latest.part_trad}:null,
+     ].filter(Boolean)},
+    {key:'part',label:'Participación Digital',
+     val:fmt.pct(latest.part_dig),
+     sub:`vs ${fmt.pct(prev.part_dig)} corte anterior`,
+     delta:deltaArrow(latest.part_dig,prev.part_dig,true),
+     canals:[
+       hasPreData?{l:'Pre-gestión',col:CPRE,v:null,pct:latest.part_pre}:null,
+       {l:'Digital',col:col,v:null,pct:latest.part_dig},
+       !isZ(latest.part_trad)?{l:'Tradicional',col:'#94a3b8',v:null,pct:latest.part_trad}:null,
+     ].filter(Boolean)},
+    {key:'dv',label:'Deuda Vencida Dig.',
+     val:fmt.mm(latest.dv_dig),
+     sub:(()=>{
+       const tot=latest.dv_dig+(latest.dv_trad||0)+(hasPreData?latest.dv_pre||0:0);
+       const pct=tot>0?((latest.dv_dig/tot)*100).toFixed(1):'—';
+       return `Total: <strong>${fmt.mm(tot)}</strong> · <span style="color:${col};font-weight:700;">Dig = ${pct}%</span>`;
+     })(),
+     delta:deltaArrow(latest.dv_dig,prev.dv_dig,false),
+     canals:[
+       hasPreData&&!isZ(latest.dv_pre)?{l:'Pre-gestión',col:CPRE,v:latest.dv_pre,pct:null}:null,
+       {l:'Digital',col:col,v:latest.dv_dig,pct:null},
+       !isZ(latest.dv_trad)?{l:'Tradicional',col:'#94a3b8',v:latest.dv_trad,pct:null}:null,
+     ].filter(Boolean)},
+    {key:'rec',label:'Recupero Digital',
+     val:fmt.mm(latest.rec_dig),
+     sub:(()=>{
+       const tot=latest.rec_dig+(latest.rec_trad||0)+(hasPreData?latest.rec_pre||0:0);
+       const pct=tot>0?((latest.rec_dig/tot)*100).toFixed(1):'—';
+       return `Total: <strong>${fmt.mm(tot)}</strong> · <span style="color:${col};font-weight:700;">Dig = ${pct}%</span>`;
+     })(),
+     delta:deltaArrow(latest.rec_dig,prev.rec_dig,true),
+     canals:[
+       hasPreData&&!isZ(latest.rec_pre)?{l:'Pre-gestión',col:CPRE,v:latest.rec_pre,pct:null}:null,
+       {l:'Digital',col:col,v:latest.rec_dig,pct:null},
+       !isZ(latest.rec_trad)?{l:'Tradicional',col:'#94a3b8',v:latest.rec_trad,pct:null}:null,
+     ].filter(Boolean)},
   ];
 
+  const deltaCards=metrics.map(m=>`
+    <div class="delta-card ${colClass}">
+      <div class="delta-label">${m.label}</div>
+      <div class="delta-val">${m.val}</div>
+      <div class="delta-sub" style="font-size:10.5px;line-height:1.5;">${m.sub}</div>
+      <div class="delta-change">
+        <span class="delta-arrow ${m.delta.cls}">${m.delta.sym}</span>
+        <span class="delta-vs">vs corte anterior</span>
+      </div>
+      <div class="canal-mini">
+        ${m.canals.map(c=>`<div class="canal-mini-row">
+          <div class="canal-mini-label"><span class="canal-mini-dot" style="background:${c.col}"></span>${c.l}</div>
+          <div style="display:flex;gap:6px;align-items:center;">
+            ${c.v!=null?`<span class="canal-mini-val">${m.key==='dv'||m.key==='rec'?fmt.mmS(c.v):fmt.num(c.v)}</span>`:''}
+            ${c.pct!=null?`<span class="canal-mini-pct">${fmt.pct(c.pct)}</span>`:''}
+          </div>
+        </div>`).join('')}
+      </div>
+    </div>`).join('');
+
+  // ── TREND CHARTS HTML ──
+  const trendCharts=`
+    <div class="trend-grid">
+      <div class="trend-card">
+        <div class="trend-title">Clientes · Evolución por Corte</div>
+        <div class="trend-sub">${labels[e]} · Pre-gestión · Digital${!isYapeOrB120?' · Tradicional':''}</div>
+        <canvas id="trendCli" height="150"></canvas>
+      </div>
+      <div class="trend-card">
+        <div class="trend-title">Participación Digital vs Tradicional</div>
+        <div class="trend-sub">${labels[e]} · % del total activa</div>
+        <canvas id="trendPart" height="150"></canvas>
+      </div>
+      <div class="trend-card">
+        <div class="trend-title">Deuda Vencida · S/ MM</div>
+        <div class="trend-sub">${labels[e]} · Canal Digital acumulado</div>
+        <canvas id="trendDv" height="150"></canvas>
+      </div>
+      <div class="trend-card">
+        <div class="trend-title">Recupero · S/ MM</div>
+        <div class="trend-sub">${labels[e]} · Canal Digital acumulado</div>
+        <canvas id="trendRec" height="150"></canvas>
+      </div>
+    </div>`;
+
+  // ── CORTE TABLE ──
+  const tableRows=data.map(d=>{
+    const tradCols=isYapeOrB120?'':`<td>${fmt.num(d.cli_trad)}</td><td class="${e==='b120'?'':''}"><span class="pill trad">${fmt.pct(d.part_trad)}</span></td><td>${fmt.mm(d.dv_trad)}</td><td>${fmt.mm(d.rec_trad)}</td>`;
+    const preCols=hasPreData?`<td>${fmt.num(d.cli_pre)}</td><td>${fmt.pct(d.part_pre)}</td><td>${fmt.mm(d.dv_pre)}</td><td>${fmt.mm(d.rec_pre)}</td>`:'';
+    return`<tr>
+      <td class="date-cell">${d.label}</td>
+      ${preCols}
+      <td><span class="pill ${colClass}">${fmt.num(d.cli_dig)}</span></td>
+      <td><span class="pill ${colClass}">${fmt.pct(d.part_dig)}</span></td>
+      <td>${fmt.mm(d.dv_dig)}</td>
+      <td>${fmt.mm(d.rec_dig)}</td>
+      ${tradCols}
+    </tr>`;
+  }).join('');
+
+  const preHeads=hasPreData?`<th class="th-pre">Cli Pre</th><th class="th-pre">Part. Pre</th><th class="th-pre">DV Pre</th><th class="th-pre">Rec. Pre</th>`:'';
+  const tradHeads=isYapeOrB120?'':`<th class="th-trad">Cli Trad</th><th class="th-trad">Part. Trad</th><th class="th-trad">DV Trad</th><th class="th-trad">Rec. Trad</th>`;
+
+  document.getElementById('ind-content').innerHTML=`
+    <div class="ind-section-title" style="color:${col}">${labels[e]}</div>
+    <div class="ind-section-sub">Evolución mensual · 3 cortes de Mayo 2026 · Digital vs Tradicional${hasPreData?' · Pre-gestión':''}</div>
+    <div class="delta-grid an">${deltaCards}</div>
+    ${trendCharts}
+    <div class="corte-table-wrap an">
+      <div class="corte-table-hdr">
+        <div class="corte-table-title">Resumen por Corte · ${labels[e]}</div>
+      </div>
+      <div class="corte-scroll">
+        <table class="corte-table">
+          <thead><tr>
+            <th>Corte</th>
+            ${preHeads}
+            <th class="th-dig">Cli Dig</th><th class="th-dig">Part. Dig</th><th class="th-dig">DV Dig</th><th class="th-dig">Rec. Dig</th>
+            ${tradHeads}
+          </tr></thead>
+          <tbody>${tableRows}</tbody>
+        </table>
+      </div>
+    </div>`;
+
+  // ── RENDER CHARTS ──
+  destroyCharts();
+  requestAnimationFrame(()=>{
+    const baseOpts={responsive:true,maintainAspectRatio:true,aspectRatio:2.2,plugins:{legend:{position:'bottom',labels:{font:{family:CF,size:11,weight:'600'},color:'#374151',boxWidth:10,boxHeight:2,padding:12,usePointStyle:true}},tooltip:{backgroundColor:'#fff',titleColor:'#111827',bodyColor:'#374151',borderColor:'#e2e7ef',borderWidth:1,padding:9,titleFont:{family:CF,size:12,weight:'700'},bodyFont:{family:'JetBrains Mono',size:11}}},scales:{x:{grid:{display:false},ticks:{font:{family:CF,size:11,weight:'600'},color:'#374151'}},y:{grid:{color:'#f0f2f5'},ticks:{font:{family:'JetBrains Mono',size:10},color:'#6b7280'},border:{dash:[4,4]}}}};
+
+    // CLI chart — bars by canal
+    const cliDs=[];
+    if(hasPreData)cliDs.push({label:'Pre-gestión',data:data.map(d=>d.cli_pre),backgroundColor:CPRE,borderRadius:5,borderSkipped:false});
+    cliDs.push({label:'Digital',data:data.map(d=>d.cli_dig),backgroundColor:col,borderRadius:5,borderSkipped:false});
+    if(!isYapeOrB120)cliDs.push({label:'Tradicional',data:data.map(d=>d.cli_trad),backgroundColor:CTRAD,borderRadius:5,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5});
+    const c1=new Chart(document.getElementById('trendCli').getContext('2d'),{type:'bar',data:{labels:dates,datasets:cliDs},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,ticks:{...baseOpts.scales.y.ticks,callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v}}}}});
+    chartInstances.push(c1);
+
+    // PARTICIPACION — line stacked area
+    const partDs=[];
+    if(hasPreData)partDs.push({label:'Pre-gestión',data:data.map(d=>+(d.part_pre*100).toFixed(1)),borderColor:CPRE,backgroundColor:'rgba(124,58,237,.08)',borderWidth:2,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7});
+    partDs.push({label:'Digital',data:data.map(d=>+(d.part_dig*100).toFixed(1)),borderColor:col,backgroundColor:col.replace(')',',0.08)').replace('rgb','rgba'),borderWidth:2.5,fill:true,tension:0.35,pointRadius:4,pointHoverRadius:7});
+    if(!isYapeOrB120)partDs.push({label:'Tradicional',data:data.map(d=>+(d.part_trad*100).toFixed(1)),borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:2,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[6,3]});
+    const c2=new Chart(document.getElementById('trendPart').getContext('2d'),{type:'line',data:{labels:dates,datasets:partDs},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,ticks:{...baseOpts.scales.y.ticks,callback:v=>v+'%'},max:100}}}});
+    chartInstances.push(c2);
+
+    // DV chart — lines
+    const dvDs=[];
+    if(hasPreData&&data.some(d=>d.dv_pre>0))dvDs.push({label:'Pre-gestión',data:data.map(d=>+d.dv_pre.toFixed(2)),borderColor:CPRE,backgroundColor:'transparent',borderWidth:2,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[4,3]});
+    dvDs.push({label:'Digital',data:data.map(d=>+d.dv_dig.toFixed(2)),borderColor:col,backgroundColor:col.replace(')',',0.07)').replace('rgb','rgba'),borderWidth:2.5,fill:true,tension:0.35,pointRadius:4,pointHoverRadius:7});
+    if(!isYapeOrB120&&data.some(d=>d.dv_trad>0&&d.dv_trad<5000))dvDs.push({label:'Tradicional',data:data.map(d=>+d.dv_trad.toFixed(2)),borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:2,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[6,3]});
+    const c3=new Chart(document.getElementById('trendDv').getContext('2d'),{type:'line',data:{labels:dates,datasets:dvDs},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,ticks:{...baseOpts.scales.y.ticks,callback:v=>'S/'+v}}}}});
+    chartInstances.push(c3);
+
+    // RECUPERO chart
+    const recDs=[];
+    if(hasPreData&&data.some(d=>d.rec_pre>0))recDs.push({label:'Pre-gestión',data:data.map(d=>+d.rec_pre.toFixed(2)),borderColor:CPRE,backgroundColor:'transparent',borderWidth:2,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[4,3]});
+    recDs.push({label:'Digital',data:data.map(d=>+d.rec_dig.toFixed(2)),borderColor:col,backgroundColor:col.replace(')',',0.07)').replace('rgb','rgba'),borderWidth:2.5,fill:true,tension:0.35,pointRadius:4,pointHoverRadius:7});
+    if(!isYapeOrB120&&data.some(d=>d.rec_trad>0))recDs.push({label:'Tradicional',data:data.map(d=>+d.rec_trad.toFixed(2)),borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:2,fill:false,tension:0.35,pointRadius:4,pointHoverRadius:7,borderDash:[6,3]});
+    const c4=new Chart(document.getElementById('trendRec').getContext('2d'),{type:'line',data:{labels:dates,datasets:recDs},options:{...baseOpts,scales:{...baseOpts.scales,y:{...baseOpts.scales.y,ticks:{...baseOpts.scales.y.ticks,callback:v=>'S/'+v}}}}});
+    chartInstances.push(c4);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════════════
+//  ██████████  SEGUIMIENTO PAGE  ██████████
+// ═══════════════════════════════════════════════════════════════════
+function setEntity(e){
+  segEntity=e;
+  document.getElementById('tab-bcp').className='ent-tab bcp'+(e==='bcp'?' active':'');
+  document.getElementById('tab-yape').className='ent-tab yape'+(e==='yape'?' active':'');
+  ['plus120-group','nav-plus120-item'].forEach(id=>{
+    document.getElementById(id).style.display=e==='yape'?'none':'';
+  });
+  if(e==='yape'&&(currentView.startsWith('t121')||currentView.startsWith('py')||currentView.startsWith('seg'))){
+    navigate('total');
+  } else navigate(currentView);
+}
+
+function toggleDrawer(){const p=document.getElementById('leftPanel'),o=document.getElementById('drawerOverlay'),h=document.getElementById('hamburger'),open=!p.classList.contains('open');[p,o,h].forEach(el=>el.classList.toggle('open',open));}
+function closeDrawer(){['leftPanel','drawerOverlay','hamburger'].forEach(id=>document.getElementById(id).classList.remove('open'));}
+function navAndClose(v){navigate(v);if(window.innerWidth<=900)closeDrawer();}
+function clearActive(){document.querySelectorAll('.t-btn,.s-btn,.ss-btn,.sss-btn').forEach(b=>b.classList.remove('active-bcp','active-yape'));}
+function toggleT(id){const s=document.getElementById('sub-'+id),b=document.getElementById('nav-'+id);if(!s)return;s.classList.toggle('open');if(b)b.classList.toggle('expanded',s.classList.contains('open'));}
+function toggleSub(id){const s=document.getElementById('sub-'+id);if(s)s.classList.toggle('open');}
+function toggleSS(id){const s=document.getElementById('sub-'+id);if(s)s.classList.toggle('open');}
+function destroyCharts(){chartInstances.forEach(c=>c.destroy());chartInstances=[];}
+function navigate(view){
+  currentView=view;clearActive();destroyCharts();
+  const el=document.getElementById('nav-'+view);if(el)el.classList.add('active-'+segEntity);
+  document.getElementById('rightPanel').scrollTop=0;
+  renderView(view);
+}
+
+// KPI DONUTS
+function kpiSection(d,hasPre,isYape){
+  const col={pre:CPRE,dig:entColor(segEntity),trad:'#94a3b8'};
+  const metrics=[
+    {id:'dc',title:'Clientes',k:'cd',kt:'ct',kp:null,fmt:v=>Math.round(v).toLocaleString('es-PE'),tot:d.cd+(d.ct||0)},
+    {id:'dd',title:'Deuda Vencida',k:'dvd',kt:'dvt',kp:'dvp',fmt:v=>'S/'+v.toFixed(1),tot:(d.dvd||0)+(d.dvt||0)+(hasPre?d.dvp||0:0)},
+    {id:'dr',title:'Recupero',k:'rd',kt:'rt',kp:'rp',fmt:v=>'S/'+v.toFixed(1),tot:(d.rd||0)+(d.rt||0)+(hasPre?d.rp||0:0)},
+  ];
   const donutCards=metrics.map(m=>{
     const vals=[];
-    if(hasPre&&m.kp&&!isZ(d[m.kp]))vals.push({l:'Pre',col:col.pre,v:d[m.kp]});
     if(!isZ(d[m.k]))vals.push({l:'Dig',col:col.dig,v:d[m.k]});
     if(!isYape&&!isZ(d[m.kt]))vals.push({l:'Trad',col:col.trad,v:d[m.kt]});
     const tot=vals.reduce((s,x)=>s+x.v,0);
     const legs=vals.map(x=>`<div class="leg-row"><div class="leg-left"><span class="leg-dot" style="background:${x.col}"></span><span class="leg-lbl">${x.l}</span></div><span class="leg-val">${m.fmt(x.v)}</span><span class="leg-pct">${tot>0?(x.v/tot*100).toFixed(0)+'%':''}</span></div>`).join('');
     return`<div class="kpi-card an an2"><div class="kpi-card-title">${m.title}</div><div class="donut-wrap"><canvas id="${m.id}" width="110" height="110"></canvas><div class="donut-center"><div class="donut-val">${m.fmt(m.tot)}</div><div class="donut-sub">Total</div></div></div><div class="kpi-leg">${legs}</div></div>`;
   }).join('');
-
-  // Efectividad bar card
   const efSrc=[];
-  if(hasPre&&!isZ(d.ep))efSrc.push({l:'Pre-gestión',col:col.pre,v:d.ep});
+  if(hasPre&&!isZ(d.ep))efSrc.push({l:'Pre',col:col.pre,v:d.ep});
   if(!isZ(d.ed))efSrc.push({l:'Digital',col:col.dig,v:d.ed});
-  if(!isZ(d.et))efSrc.push({l:isYape?'Ref. Trad':'Tradicional',col:col.trad,v:d.et});
+  if(!isZ(d.et))efSrc.push({l:isYape?'Ref.Trad':'Tradicional',col:col.trad,v:d.et});
   const efLegs=efSrc.map(x=>`<div class="leg-row"><div class="leg-left"><span class="leg-dot" style="background:${x.col}"></span><span class="leg-lbl">${x.l}</span></div><span class="leg-val">${fmt.pct(x.v)}</span></div>`).join('');
   const efCard=`<div class="kpi-card an an2"><div class="kpi-card-title">Efectividad</div><canvas id="def" height="110" style="max-height:110px;"></canvas><div class="kpi-leg" style="margin-top:8px;">${efLegs}<div style="margin-top:5px;padding-top:5px;border-top:1px solid var(--border);">${wlPill(d.ed,d.et,false)}</div></div></div>`;
-
   return`<div class="kpi-grid an an2">${donutCards}${efCard}</div>`;
 }
 
 function renderDonuts(d,hasPre,isYape){
-  const col={pre:'#7c3aed',dig:entColor(),trad:'#94a3b8'};
-  [['dc','cd','ct',null],['dd','dvd','dvt','dvp'],['dr','rd','rt','rp']].forEach(([id,kd,kt,kp])=>{
+  const col={pre:CPRE,dig:entColor(segEntity),trad:'#94a3b8'};
+  [['dc','cd','ct'],['dd','dvd','dvt'],['dr','rd','rt']].forEach(([id,kd,kt])=>{
     const vals=[];
-    if(hasPre&&kp&&!isZ(d[kp]))vals.push({v:d[kp],c:col.pre});
     if(!isZ(d[kd]))vals.push({v:d[kd],c:col.dig});
     if(!isYape&&!isZ(d[kt]))vals.push({v:d[kt],c:col.trad});
     if(!vals.length)return;
@@ -591,48 +1160,38 @@ function renderDonuts(d,hasPre,isYape){
     const c=new Chart(ctx,{type:'doughnut',data:{datasets:[{data:vals.map(x=>x.v),backgroundColor:vals.map(x=>x.c),borderWidth:2,borderColor:'#fff',hoverOffset:4}]},options:{cutout:'68%',responsive:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',titleColor:'#111',bodyColor:'#374',borderColor:'#e2e7ef',borderWidth:1,padding:8,bodyFont:{family:'JetBrains Mono',size:10}}}}});
     chartInstances.push(c);
   });
-  // Ef bar
   const efSrc=[];
   if(hasPre&&!isZ(d.ep))efSrc.push({l:'Pre',col:col.pre,v:d.ep});
   if(!isZ(d.ed))efSrc.push({l:'Digital',col:col.dig,v:d.ed});
-  if(!isZ(d.et))efSrc.push({l:isYape?'Ref. Trad':'Tradicional',col:col.trad,v:d.et});
+  if(!isZ(d.et))efSrc.push({l:isYape?'Ref.Trad':'Tradicional',col:col.trad,v:d.et});
   if(!efSrc.length)return;
   const ctx2=document.getElementById('def')?.getContext('2d');if(!ctx2)return;
   const c2=new Chart(ctx2,{type:'bar',data:{labels:efSrc.map(x=>x.l),datasets:[{data:efSrc.map(x=>+(x.v*100).toFixed(1)),backgroundColor:efSrc.map(x=>x.col),borderRadius:5,borderSkipped:false}]},options:{indexAxis:'y',responsive:false,plugins:{legend:{display:false},tooltip:{backgroundColor:'#fff',bodyColor:'#374',borderColor:'#e2e7ef',borderWidth:1,padding:8,bodyFont:{family:'JetBrains Mono',size:11},callbacks:{label:c=>` ${c.parsed.x.toFixed(1)}%`}}},scales:{x:{grid:{color:'#f0f2f5'},ticks:{font:{family:'JetBrains Mono',size:9},color:'#6b7280',callback:v=>v+'%'},border:{dash:[4,4]},max:100},y:{grid:{display:false},ticks:{font:{family:CF,size:9.5,weight:'600'},color:'#374151'}}}}});
   chartInstances.push(c2);
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  CHARTS
-// ═══════════════════════════════════════════════════════════════
 function barCliChart(id,labels,datasets){
   const ctx=document.getElementById(id)?.getContext('2d');if(!ctx)return;
   const c=new Chart(ctx,{type:'bar',data:{labels,datasets},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.9,plugins:{legend:{labels:{font:{family:CF,size:11,weight:'600'},color:'#374151',boxWidth:10,usePointStyle:true,pointStyle:'rect'}},tooltip:{backgroundColor:'#fff',titleColor:'#111827',bodyColor:'#374151',borderColor:'#e2e7ef',borderWidth:1,padding:9,titleFont:{family:CF,size:12,weight:'700'},bodyFont:{family:'JetBrains Mono',size:11},callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y!=null?Math.round(c.parsed.y).toLocaleString('es-PE'):'N/D'}`}}},scales:{x:{grid:{display:false},ticks:{font:{family:CF,size:11,weight:'600'},color:'#374151'}},y:{grid:{color:'#f0f2f5'},ticks:{font:{family:'JetBrains Mono',size:10},color:'#6b7280',callback:v=>v>=1000?(v/1000).toFixed(0)+'K':v},border:{dash:[4,4]}}}}}); chartInstances.push(c);
 }
 
 function lineEfChart(id){
-  // Line: efectividad digital vs tradicional por tramo para la entidad activa
-  const e=entity;
-  const isYape=e==='yape';
+  const e=segEntity,isYape=e==='yape';
   const src=isYape?YAPE:BCP;
   const lbls=isYape?['1–30','31–60','61–90','91–120']:['1–30','31–60','61–90','91–120','+120'];
   const keys=isYape?['t130','t3160','t6190','t91120']:['t130','t3160','t6190','t91120','t121'];
-  const getEf=(k,canal)=>{const r=src[k];if(!r)return null;const v=r[canal];return v!=null&&!isZ(v)?+(v*100).toFixed(2):null;};
-  const col=entColor();
-  const datasets=[{label:'Digital',data:keys.map(k=>getEf(k,'ed')),borderColor:col,backgroundColor:col.replace(')',',0.07)').replace('rgb','rgba'),borderWidth:2.5,pointBackgroundColor:col,pointRadius:4,pointHoverRadius:7,fill:true,tension:0.35}];
-  if(!isYape)datasets.push({label:'Tradicional',data:keys.map(k=>getEf(k,'et')),borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:2,pointBackgroundColor:'#94a3b8',pointRadius:4,pointHoverRadius:7,fill:false,tension:0.35,borderDash:[6,3]});
-  else datasets.push({label:'Ref. Tradicional',data:keys.map(k=>getEf(k,'et')),borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:2,pointBackgroundColor:'#94a3b8',pointRadius:4,pointHoverRadius:7,fill:false,tension:0.35,borderDash:[6,3]});
+  const getEf=(k,c)=>{const r=src[k];if(!r)return null;const v=r[c];return v!=null&&!isZ(v)?+(v*100).toFixed(2):null;};
+  const col=entColor(e);
+  const datasets=[{label:'Digital',data:keys.map(k=>getEf(k,'ed')),borderColor:col,backgroundColor:col+'14',borderWidth:2.5,pointBackgroundColor:col,pointRadius:4,pointHoverRadius:7,fill:true,tension:0.35}];
+  datasets.push({label:isYape?'Ref. Tradicional':'Tradicional',data:keys.map(k=>getEf(k,'et')),borderColor:'#94a3b8',backgroundColor:'transparent',borderWidth:2,pointBackgroundColor:'#94a3b8',pointRadius:4,pointHoverRadius:7,fill:false,tension:0.35,borderDash:[6,3]});
   const ctx=document.getElementById(id)?.getContext('2d');if(!ctx)return;
   const c=new Chart(ctx,{type:'line',data:{labels:lbls,datasets},options:{responsive:true,maintainAspectRatio:true,aspectRatio:1.9,plugins:{legend:{position:'bottom',labels:{font:{family:CF,size:11,weight:'600'},color:'#374151',boxWidth:10,boxHeight:2,padding:14,usePointStyle:true}},tooltip:{backgroundColor:'#fff',titleColor:'#111827',bodyColor:'#374151',borderColor:'#e2e7ef',borderWidth:1,padding:9,titleFont:{family:CF,size:12,weight:'700'},bodyFont:{family:'JetBrains Mono',size:11},callbacks:{label:c=>` ${c.dataset.label}: ${c.parsed.y!=null?c.parsed.y.toFixed(1)+'%':'N/D'}`}}},scales:{x:{grid:{display:false},ticks:{font:{family:CF,size:11,weight:'600'},color:'#374151'}},y:{grid:{color:'#f0f2f5'},ticks:{font:{family:'JetBrains Mono',size:10},color:'#6b7280',callback:v=>v+'%'},border:{dash:[4,4]}}}}}); chartInstances.push(c);
 }
 
 function chartsBlock(barId,barTitle,barSub,lineId){
-  return`<div class="charts-row an an3"><div class="chart-card"><div class="chart-title">${barTitle}</div><div class="chart-sub">${barSub}</div><canvas id="${barId}" height="140"></canvas></div><div class="chart-card"><div class="chart-title">Tendencia Efectividad · Dig vs Trad</div><div class="chart-sub">Por tramo de mora · ${entity.toUpperCase()}</div><canvas id="${lineId}" height="150"></canvas></div></div>`;
+  return`<div class="charts-row an an3"><div class="chart-card"><div class="chart-title">${barTitle}</div><div class="chart-sub">${barSub}</div><canvas id="${barId}" height="140"></canvas></div><div class="chart-card"><div class="chart-title">Tendencia Efectividad · Dig vs Trad</div><div class="chart-sub">Por tramo de mora · ${segEntity.toUpperCase()} · Corte 20/05</div><canvas id="${lineId}" height="150"></canvas></div></div>`;
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  TABLE HELPERS
-// ═══════════════════════════════════════════════════════════════
 const TK={'0-1k':'0–1K','1k-5k':'1K–5K','5k-20k':'5K–20K','20k-300k':'20K–300K','300k':'300K+','1k':'1K+'};
 function tl(k){return TK[k]||k;}
 
@@ -643,331 +1202,144 @@ function tHead(hasPre,isYape){
 }
 
 function tRow(label,d,hasPre,isYape,nav,rc='',noDig){
-  const nd=noDig||false;
+  if(!d)return'';
+  const nd=noDig||!!d.noDig||false;
   const cls=[nav?'cl':'',rc].filter(Boolean).join(' ');
   const click=nav?`onclick="navigate('${nav}')"`:'';
   const pp=hasPre&&d.ep!=null&&!isZ(d.ep)?`<span class="pill pre">${fmt.pct(d.ep)}</span>`:'<span class="na-c">—</span>';
-  const pd=nd||isZ(d.ed)?'<span class="na-c">0</span>':`<span class="pill ${entity}">${fmt.pct(d.ed)}</span>`;
+  const pd=nd||isZ(d.ed)?'<span class="na-c">0</span>':`<span class="pill ${segEntity}">${fmt.pct(d.ed)}</span>`;
   const cliPre=hasPre?`<td>${!isZ(d.ep)?fmt.num(d.cd):'<span class="na-c">—</span>'}</td><td>${pp}</td>`:`<td class="na-c">—</td><td class="na-c">—</td>`;
   const cliDig=nd?'<span class="na-c">0</span>':fmt.num(d.cd);
   const tradCols=isYape?'':` <td>${fmt.num(d.ct)}</td><td>${!isZ(d.et)?`<span class="pill trad">${fmt.pct(d.et)}</span>`:'<span class="na-c">—</span>'}</td><td class="gap-cell">${wlPill(nd?null:d.ed,d.et,nd)}</td>`;
-  const dvDig=nd||isZ(d.dvd)?'<span class="na-c">0</span>':fmt.mm(d.dvd);
-  const recDig=nd||isZ(d.rd)?'<span class="na-c">0</span>':fmt.mm(d.rd);
-  return`<tr class="${cls}" ${click}><td>${label}</td>${cliPre}<td>${cliDig}</td><td>${pd}</td>${tradCols}<td>${dvDig}</td><td>${recDig}</td></tr>`;
+  return`<tr class="${cls}" ${click}><td>${label}</td>${cliPre}<td>${cliDig}</td><td>${pd}</td>${tradCols}<td>${nd||isZ(d.dvd)?'<span class="na-c">0</span>':fmt.mm(d.dvd)}</td><td>${nd||isZ(d.rd)?'<span class="na-c">0</span>':fmt.mm(d.rd)}</td></tr>`;
 }
 
-// ═══════════════════════════════════════════════════════════════
-//  BREADCRUMB
-// ═══════════════════════════════════════════════════════════════
-const BC_MAP={
-  'total':['Total 1–120'],'t130-res':['Tramo 1–30','Resumen'],'t3160-res':['Tramo 31–60','Resumen'],
-  't6190-res':['Tramo 61–90','Resumen'],'t91120-res':['Tramo 91–120','Resumen'],
-  't121-res':['Tramo +120','Resumen'],'t121-0-1k':['Tramo +120','0–1K'],'t121-1k':['Tramo +120','1K+'],
-  'p130-res':['Tramo 1–30','Personas','Resumen'],'py130-res':['Tramo 1–30','Pyme','Resumen'],
-  'p3160-res':['Tramo 31–60','Personas','Resumen'],'py3160-res':['Tramo 31–60','Pyme (solo Trad.)'],
-  'pyD130-res':['Tramo 1–30','Pyme','Seg D'],
-};
+const BCM={'total':['Total 1–120'],'t130-res':['Tramo 1–30','Resumen'],'t3160-res':['Tramo 31–60','Resumen'],'t6190-res':['Tramo 61–90','Resumen'],'t91120-res':['Tramo 91–120','Resumen'],'t121-res':['Tramo +120','Resumen'],'t121-0-1k':['Tramo +120','0–1K'],'t121-1k':['Tramo +120','1K+'],'p130-res':['Tramo 1–30','Personas','Resumen'],'py130-res':['Tramo 1–30','Pyme','Resumen'],'p3160-res':['Tramo 31–60','Personas','Resumen'],'py3160-res':['Tramo 31–60','Pyme (solo Trad.)'],'pyD130-res':['Tramo 1–30','Pyme','Seg D']};
 function buildBC(v){
-  if(BC_MAP[v])return BC_MAP[v];
-  // segment res: segA130-res → Tramo 1-30 / Personas / Seg A
-  let m=v.match(/^(seg|py)([ABCD])130-res$/);
-  if(m)return['Tramo 1–30',m[1]==='py'?'Pyme':'Personas',`Seg ${m[2]}`,'Resumen'];
-  m=v.match(/^(seg|py)([ABCD])130-(.+)$/);
-  if(m)return['Tramo 1–30',m[1]==='py'?'Pyme':'Personas',`Seg ${m[2]}`,TK[m[3]]||m[3]];
-  m=v.match(/^p3160-(.+)$/);
-  if(m)return['Tramo 31–60','Personas',TK[m[1]]||m[1]];
+  if(BCM[v])return BCM[v];
+  let m=v.match(/^(seg|py)([ABCD])130-res$/);if(m)return['Tramo 1–30',m[1]==='py'?'Pyme':'Personas',`Seg ${m[2]}`,'Resumen'];
+  m=v.match(/^(seg|py)([ABCD])130-(.+)$/);if(m)return['Tramo 1–30',m[1]==='py'?'Pyme':'Personas',`Seg ${m[2]}`,TK[m[3]]||m[3]];
+  m=v.match(/^p3160-(.+)$/);if(m)return['Tramo 31–60','Personas',TK[m[1]]||m[1]];
   return[v];
 }
-function bcHtml(v){
-  const parts=buildBC(v);
-  return`<div class="bc an">${parts.map((p,i)=>(i?'<span class="bc-sep">›</span>':'')+`<span class="${i===parts.length-1?'bc-cur':''}">${p}</span>`).join('')}</div>`;
-}
+function bcHtml(v){const parts=buildBC(v);return`<div class="bc an">${parts.map((p,i)=>(i?'<span class="bc-sep">›</span>':'')+`<span class="${i===parts.length-1?'bc-cur':''}">${p}</span>`).join('')}</div>`;}
 
-// ═══════════════════════════════════════════════════════════════
-//  RENDER ROUTER
-// ═══════════════════════════════════════════════════════════════
 function renderView(v){
   const p=document.getElementById('rightPanel');
-  const isYape=entity==='yape';
-
+  const isYape=segEntity==='yape';
   if(v==='total'){renderTotal(p);return;}
-
-  // Tramo summaries
   if(v==='t130-res'){renderTramoRes(p,'t130','Tramo 1–30',true);return;}
   if(v==='t3160-res'){renderTramoRes(p,'t3160','Tramo 31–60',false);return;}
-  if(v==='t6190-res'){renderSimple(p,'t6190','Tramo 61–90','Sin zoom por sub-segmento',false);return;}
-  if(v==='t91120-res'){renderSimple(p,'t91120','Tramo 91–120','Sin zoom por sub-segmento',false);return;}
-  if(v==='t121-res'&&!isYape){renderSimple(p,'t121','Tramo +120','BCP · Por ticket de deuda',false,true);return;}
+  if(v==='t6190-res'){renderSimple(p,'t6190','Tramo 61–90','Sin zoom',false);return;}
+  if(v==='t91120-res'){renderSimple(p,'t91120','Tramo 91–120','Sin zoom',false);return;}
+  if(v==='t121-res'&&!isYape){renderSimple(p,'t121','Tramo +120','BCP',false,true);return;}
   if(v==='t121-0-1k'&&!isYape){renderTicketSimple(p,'t121-0-1k','0–1K','Tramo +120');return;}
   if(v==='t121-1k'&&!isYape){renderTicketSimple(p,'t121-1k','1K+','Tramo +120');return;}
-
-  // 1-30 Personas
-  if(v==='p130-res'){renderPortRes(p,'p130','Personas','Tramo 1–30',true);return;}
-  if(v==='py130-res'){renderPortRes(p,'py130','Pyme','Tramo 1–30',true);return;}
-  if(v==='pyD130-res'){renderSimple(p,'pyD130','Pyme · Seg D','Tramo 1–30',true);return;}
-
-  // Segments 1-30 Personas
-  const mSeg=v.match(/^(seg[ABCD])130(-res|-\S+)$/);
-  if(mSeg){
-    const segKey=mSeg[1]+'130';
-    const suffix=mSeg[2];
-    if(suffix==='-res'){renderSegRes(p,segKey,`Seg ${mSeg[1][3]}`,'Personas 1–30',true);return;}
-    else{renderTicketBCP(p,segKey,suffix.slice(1),`Seg ${mSeg[1][3]}`,'Personas 1–30');return;}
-  }
-
-  // Segments 1-30 Pyme
-  const mPy=v.match(/^(py[ABC])130(-res|-\S+)$/);
-  if(mPy){
-    const segKey=mPy[1]+'130';
-    const suffix=mPy[2];
-    if(suffix==='-res'){renderSegRes(p,segKey,`Seg ${mPy[1][2]}`,'Pyme 1–30',true,true);return;}
-    else{renderTicketBCP(p,segKey,suffix.slice(1),`Seg ${mPy[1][2]}`,'Pyme 1–30');return;}
-  }
-
-  // 31-60 Personas tickets
+  if(v==='p130-res'){renderPortRes(p,'p130','Personas','Tramo 1–30',false);return;}
+  if(v==='py130-res'){renderPortRes(p,'py130','Pyme','Tramo 1–30',false);return;}
+  if(v==='pyD130-res'){renderSimple(p,'pyD130','Pyme · Seg D','Tramo 1–30',false);return;}
   if(v==='p3160-res'){renderPortRes(p,'p3160','Personas','Tramo 31–60',false);return;}
-  if(v==='py3160-res'){renderSimple(p,'py3160','Pyme · Solo Tradicional','Tramo 31–60',false,false,true);return;}
+  if(v==='py3160-res'){renderSimple(p,'py3160','Pyme · Solo Trad.','Tramo 31–60',false,false,true);return;}
+  const mSeg=v.match(/^(seg[ABCD])130(-res|-\S+)$/);
+  if(mSeg){const sk=mSeg[1]+'130',sf=mSeg[2];if(sf==='-res')renderSegRes(p,sk,`Seg ${mSeg[1][3]}`,'Personas 1–30',false);else renderTicketBCP(p,sk,sf.slice(1),`Seg ${mSeg[1][3]}`,'Personas 1–30',false);return;}
+  const mPy=v.match(/^(py[ABC])130(-res|-\S+)$/);
+  if(mPy){const sk=mPy[1]+'130',sf=mPy[2];if(sf==='-res')renderSegRes(p,sk,`Seg ${mPy[1][2]}`,'Pyme 1–30',false);else renderTicketBCP(p,sk,sf.slice(1),`Seg ${mPy[1][2]}`,'Pyme 1–30',false);return;}
   const mP3=v.match(/^p3160-(.+)$/);
   if(mP3){renderTicketBCP(p,'p3160',mP3[1],'Personas','Tramo 31–60',false);return;}
-
   p.innerHTML=bcHtml(v)+'<div class="no-data"><span>🔍</span>Vista no encontrada</div>';
 }
 
-// ─────────────────────────────────────────
-//  TOTAL
-// ─────────────────────────────────────────
 function renderTotal(p){
-  const isYape=entity==='yape';
-  const src=isYape?YAPE:BCP;
-  const d=src['1-120']||src;
-  const hasPre=!isYape;
+  const isYape=segEntity==='yape',src=isYape?YAPE:BCP,d=src['1-120']||src,hasPre=false;
   const tramos=isYape
     ?[{l:'1–30',k:'t130',n:'t130-res'},{l:'31–60',k:'t3160',n:'t3160-res'},{l:'61–90',k:'t6190',n:'t6190-res'},{l:'91–120',k:'t91120',n:'t91120-res'}]
     :[{l:'1–30',k:'t130',n:'t130-res'},{l:'31–60',k:'t3160',n:'t3160-res'},{l:'61–90',k:'t6190',n:'t6190-res'},{l:'91–120',k:'t91120',n:'t91120-res'},{l:'+120',k:'t121',n:'t121-res'}];
+  const tramosSin121=tramos.filter(t=>t.k!=='t121');
   const rows=tramos.map(t=>tRow(t.l,src[t.k]||{},hasPre,isYape,t.n)).join('');
-
-  p.innerHTML=`${bcHtml('total')}
-    <div class="sec-hdr an"><div class="sec-title ${entity}">Total 1–120 días</div><div class="sec-sub">${entity.toUpperCase()} · Corte 14/05/2026${isYape?' · 100% Canal Digital':' · Pre-gestión · Digital · Tradicional'}</div></div>
-    ${wlBanner(d.ed,d.et,'Total 1–120')}
-    ${kpiSection(d,hasPre,isYape)}
-    ${chartsBlock('bTot','Clientes por Tramo · Canales',`${entity.toUpperCase()} · Por tramo de mora`,'lTot')}
-    <div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">Resumen por Tramo</div><div class="tbl-badge">Toca fila → zoom</div></div>
-    <div class="tbl-scroll"><table>${tHead(hasPre,isYape)}<tbody>${rows}</tbody></table></div></div>`;
-
+  p.innerHTML=`${bcHtml('total')}<div class="sec-hdr an"><div class="sec-title ${segEntity}">Total 1–120 días</div><div class="sec-sub">${segEntity.toUpperCase()} · Corte 20/05/2026</div></div>${wlBanner(d.ed,d.et,'Total 1–120')}${kpiSection(d,hasPre,isYape)}${chartsBlock('bTot','Clientes por Tramo 1–120','Digital vs Tradicional','lTot')}<div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">Resumen por Tramo</div><div class="tbl-badge">Toca fila → zoom</div></div><div class="tbl-scroll"><table>${tHead(hasPre,isYape)}<tbody>${rows}</tbody></table></div></div>`;
   requestAnimationFrame(()=>{
     renderDonuts(d,hasPre,isYape);
-    const col=entColor();
-    // Exclude +120 from bar chart — title says 1-120
-    const tramosSin121=tramos.filter(t=>t.k!=='t121');
-    const lbls=tramosSin121.map(t=>t.l);
-    const ds=hasPre
-      ?[{label:'Digital',    data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-        {label:'Tradicional',data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
-      :[{label:'Digital',data:tramosSin121.map(t=>{const r=src[t.k];return r?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false}];
-    barCliChart('bTot',lbls,ds);
-    lineEfChart('lTot');
+    const col=entColor(segEntity),lbls=tramosSin121.map(t=>t.l);
+    const ds=[{label:'Digital',data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},{label:'Tradicional',data:tramosSin121.map(t=>{const r=src[t.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
+    barCliChart('bTot',lbls,ds);lineEfChart('lTot');
   });
 }
 
-// ─────────────────────────────────────────
-//  TRAMO RESUMEN
-// ─────────────────────────────────────────
 function renderTramoRes(p,key,title,hasPre){
-  const isYape=entity==='yape';
-  const src=isYape?YAPE:BCP;
-  const d=src[key];
+  const isYape=segEntity==='yape',src=isYape?YAPE:BCP,d=src[key];
   if(!d){p.innerHTML=bcHtml(key+'-res')+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
-
-  let subRows='',subDef=[];
-  if(isYape&&d.sub){
-    subRows=d.sub.map(s=>`<tr><td style="padding-left:24px;font-family:var(--mono);font-size:12px;">${s.l}</td><td class="na-c">—</td><td class="na-c">—</td><td>${fmt.num(s.cd)}</td><td><span class="pill yape">${fmt.pct(s.ed)}</span></td><td>${fmt.mm(s.dvd)}</td><td>${fmt.mm(s.rd)}</td></tr>`).join('');
-    subDef=d.sub;
-  } else if(!isYape&&key==='t130'){
-    subDef=[{l:'Personas',k:'p130',n:'p130-res'},{l:'Pyme',k:'py130',n:'py130-res'}];
-    subRows=subDef.map(s=>tRow(s.l,BCP[s.k],hasPre,false,s.n,'rs')).join('');
-  } else if(!isYape&&key==='t3160'){
-    subDef=[{l:'Personas',k:'p3160',n:'p3160-res'},{l:'Pyme (solo Trad.)',k:'py3160',n:'py3160-res',nd:true}];
-    subRows=subDef.map(s=>tRow(s.l,BCP[s.k],false,false,s.n,'rs',s.nd)).join('');
-  }
-
-  p.innerHTML=`${bcHtml(key+'-res')}
-    <div class="sec-hdr an"><div class="sec-title ${entity}">${title}</div><div class="sec-sub">${entity.toUpperCase()} · ${hasPre?'Pre · Dig · Trad':'Dig vs Trad'}</div></div>
-    ${hasPre?'':noPre()}
-    ${wlBanner(d.ed,d.et,title)}
-    ${kpiSection(d,hasPre,isYape)}
-    ${chartsBlock('bTrm','Clientes por Sub-segmento',title,'lTrm')}
-    <div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">Desglose del Tramo</div><div class="tbl-badge">Toca → detalle</div></div>
-    <div class="tbl-scroll"><table>${tHead(hasPre,isYape)}<tbody>${subRows}</tbody></table></div></div>`;
-
+  let subDef=[],subRows='';
+  if(isYape&&d.sub){subRows=d.sub.map(s=>`<tr><td style="padding-left:24px;font-family:var(--mono);font-size:12px;">${s.l}</td><td class="na-c">—</td><td class="na-c">—</td><td>${fmt.num(s.cd)}</td><td><span class="pill yape">${fmt.pct(s.ed)}</span></td><td>${fmt.mm(s.dvd)}</td><td>${fmt.mm(s.rd)}</td></tr>`).join('');subDef=d.sub;}
+  else if(!isYape&&key==='t130'){subDef=[{l:'Personas',k:'p130',n:'p130-res'},{l:'Pyme',k:'py130',n:'py130-res'}];subRows=subDef.map(s=>tRow(s.l,BCP[s.k],hasPre,false,s.n,'rs')).join('');}
+  else if(!isYape&&key==='t3160'){subDef=[{l:'Personas',k:'p3160',n:'p3160-res'},{l:'Pyme (solo Trad.)',k:'py3160',n:'py3160-res',nd:true}];subRows=subDef.map(s=>tRow(s.l,BCP[s.k],false,false,s.n,'rs',s.nd)).join('');}
+  p.innerHTML=`${bcHtml(key+'-res')}<div class="sec-hdr an"><div class="sec-title ${segEntity}">${title}</div><div class="sec-sub">${segEntity.toUpperCase()} · ${hasPre?'Pre · Dig · Trad':'Dig vs Trad'}</div></div>${hasPre?'':noPre()}${wlBanner(d.ed,d.et,title)}${kpiSection(d,hasPre,isYape)}${chartsBlock('bTrm','Clientes por Sub-segmento',title,'lTrm')}<div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">Desglose</div><div class="tbl-badge">Toca → detalle</div></div><div class="tbl-scroll"><table>${tHead(hasPre,isYape)}<tbody>${subRows}</tbody></table></div></div>`;
   requestAnimationFrame(()=>{
     renderDonuts(d,hasPre,isYape);
-    const col=entColor();
-    if(isYape&&subDef.length){
-      barCliChart('bTrm',subDef.map(s=>s.l),[{label:'Digital',data:subDef.map(s=>s.cd),backgroundColor:col,borderRadius:4,borderSkipped:false}]);
-    } else if(!isYape&&subDef.length){
-      const lbls=subDef.map(s=>s.l);
-      const ds=hasPre
-        ?[{label:'Digital',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-          {label:'Tradicional',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
-        :[{label:'Digital',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-          {label:'Tradicional',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
-      barCliChart('bTrm',lbls,ds);
-    }
+    const col=entColor(segEntity);
+    if(!isYape&&subDef.length){const lbls=subDef.map(s=>s.l);barCliChart('bTrm',lbls,[{label:'Digital',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},{label:'Tradicional',data:subDef.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]);}
     lineEfChart('lTrm');
   });
 }
 
-// ─────────────────────────────────────────
-//  PORTAFOLIO RESUMEN (Personas / Pyme)
-// ─────────────────────────────────────────
-function renderPortRes(p,key,portLabel,tramoLabel,hasPre,isPyme){
-  const isYape=entity==='yape';
-  const d=BCP[key];
-  if(!d){p.innerHTML=bcHtml(key+'-res')+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
-
-  // Build segment sub-rows
+function renderPortRes(p,key,portLabel,tramoLabel,hasPre){
+  const d=BCP[key];if(!d){p.innerHTML=bcHtml(key+'-res')+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
   let segsKeys=[];
   if(key==='p130')segsKeys=[{l:'Seg A',k:'segA130',n:'segA130-res'},{l:'Seg B',k:'segB130',n:'segB130-res'},{l:'Seg C',k:'segC130',n:'segC130-res'},{l:'Seg D',k:'segD130',n:'segD130-res'}];
   if(key==='py130')segsKeys=[{l:'Seg A',k:'pyA130',n:'pyA130-res'},{l:'Seg B',k:'pyB130',n:'pyB130-res'},{l:'Seg C',k:'pyC130',n:'pyC130-res'},{l:'Seg D',k:'pyD130',n:'pyD130-res'}];
   if(key==='p3160')segsKeys=[{l:'0–1K',k:'p3160-0-1k',n:'p3160-0-1k'},{l:'1K–5K',k:'p3160-1k-5k',n:'p3160-1k-5k'},{l:'5K–20K',k:'p3160-5k-20k',n:'p3160-5k-20k'},{l:'20K–300K',k:'p3160-20k-300k',n:'p3160-20k-300k'},{l:'300K+',k:'p3160-300k',n:'p3160-300k'}];
   const rows=segsKeys.map(s=>tRow(s.l,BCP[s.k]||{},hasPre,false,s.n,'rs')).join('');
-
-  p.innerHTML=`${bcHtml(key+'-res')}
-    <div class="sec-hdr an"><div class="sec-title bcp">${portLabel}</div><div class="sec-sub">BCP · ${tramoLabel} · ${hasPre?'Pre · Dig · Trad':'Dig vs Trad'}</div></div>
-    ${hasPre?'':noPre()}
-    ${wlBanner(d.ed,d.et,portLabel)}
-    ${kpiSection(d,hasPre,false)}
-    ${chartsBlock('bPort',key==='p3160'?'Clientes por Ticket':'Clientes por Segmento',`${portLabel} · ${tramoLabel}`,'lPort')}
-    <div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">${key==='p3160'?'Tickets de Deuda':'Segmentos'}</div><div class="tbl-badge">Toca → detalle</div></div>
-    <div class="tbl-scroll"><table>${tHead(hasPre,false)}<tbody>${rows}</tbody></table></div></div>`;
-
+  p.innerHTML=`${bcHtml(key+'-res')}<div class="sec-hdr an"><div class="sec-title bcp">${portLabel}</div><div class="sec-sub">BCP · ${tramoLabel}</div></div>${hasPre?'':noPre()}${wlBanner(d.ed,d.et,portLabel)}${kpiSection(d,hasPre,false)}${chartsBlock('bPort',key==='p3160'?'Clientes por Ticket':'Clientes por Segmento',`${portLabel} · ${tramoLabel}`,'lPort')}<div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">${key==='p3160'?'Tickets':'Segmentos'}</div><div class="tbl-badge">Toca → detalle</div></div><div class="tbl-scroll"><table>${tHead(hasPre,false)}<tbody>${rows}</tbody></table></div></div>`;
   requestAnimationFrame(()=>{
     renderDonuts(d,hasPre,false);
-    const col=entColor();
-    const lbls=segsKeys.map(s=>s.l);
-    const ds=hasPre
-      ?[{label:'Digital',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-        {label:'Tradicional',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
-      :[{label:'Digital',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-        {label:'Tradicional',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
-    barCliChart('bPort',lbls,ds);
+    const col=entColor(segEntity),lbls=segsKeys.map(s=>s.l);
+    barCliChart('bPort',lbls,[{label:'Digital',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},{label:'Tradicional',data:segsKeys.map(s=>{const r=BCP[s.k];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]);
     lineEfChart('lPort');
   });
 }
 
-// ─────────────────────────────────────────
-//  SEGMENT RESUMEN (con tickets)
-// ─────────────────────────────────────────
-function renderSegRes(p,key,segLabel,ctxLabel,hasPre,isPyme){
-  const d=BCP[key];
-  if(!d){p.innerHTML=bcHtml(key+'-res')+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
-
-  // Find tickets for this segment
-  const prefix=key;
-  const allTks=['0-1k','1k-5k','5k-20k','20k-300k','300k'];
-  const availTks=allTks.filter(tk=>BCP[prefix+'-'+tk]!=null);
-
-  const rows=availTks.map(tk=>{
-    const td=BCP[prefix+'-'+tk];
-    const nd=isZ(td.cd)&&!isZ(td.ct);
-    return tRow(TK[tk],td,hasPre,false,prefix+'-'+tk,'rs',nd);
-  }).join('');
-
-  p.innerHTML=`${bcHtml(key+'-res')}
-    <div class="sec-hdr an"><div class="sec-title bcp">${segLabel}</div><div class="sec-sub">BCP · ${ctxLabel}</div></div>
-    ${hasPre?'':noPre()}
-    ${wlBanner(d.ed,d.et,segLabel)}
-    ${kpiSection(d,hasPre,false)}
-    ${chartsBlock('bSeg','Clientes por Ticket de Deuda',`${segLabel} · ${ctxLabel}`,'lSeg')}
-    <div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">Tickets de Deuda</div><div class="tbl-badge">Toca → detalle</div></div>
-    <div class="tbl-scroll"><table>${tHead(hasPre,false)}<tbody>${rows}</tbody></table></div></div>`;
-
+function renderSegRes(p,key,segLabel,ctxLabel,hasPre){
+  const d=BCP[key];if(!d){p.innerHTML=bcHtml(key+'-res')+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
+  const prefix=key,allTks=['0-1k','1k-5k','5k-20k','20k-300k','300k'],availTks=allTks.filter(tk=>BCP[prefix+'-'+tk]!=null);
+  const rows=availTks.map(tk=>{const td=BCP[prefix+'-'+tk];const nd=isZ(td.cd)&&!isZ(td.ct);return tRow(TK[tk],td,hasPre,false,prefix+'-'+tk,'rs',nd);}).join('');
+  p.innerHTML=`${bcHtml(key+'-res')}<div class="sec-hdr an"><div class="sec-title bcp">${segLabel}</div><div class="sec-sub">BCP · ${ctxLabel}</div></div>${hasPre?'':noPre()}${wlBanner(d.ed,d.et,segLabel)}${kpiSection(d,hasPre,false)}${chartsBlock('bSeg','Clientes por Ticket',`${segLabel} · ${ctxLabel}`,'lSeg')}<div class="tbl-section an an4"><div class="tbl-hdr"><div class="tbl-title">Tickets de Deuda</div><div class="tbl-badge">Toca → detalle</div></div><div class="tbl-scroll"><table>${tHead(hasPre,false)}<tbody>${rows}</tbody></table></div></div>`;
   requestAnimationFrame(()=>{
     renderDonuts(d,hasPre,false);
-    const col=entColor();
-    const lbls=availTks.map(tk=>TK[tk]);
-    const ds=hasPre
-      ?[{label:'Digital',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-        {label:'Tradicional',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]
-      :[{label:'Digital',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},
-        {label:'Tradicional',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}];
-    barCliChart('bSeg',lbls,ds);
+    const col=entColor(segEntity),lbls=availTks.map(tk=>TK[tk]);
+    barCliChart('bSeg',lbls,[{label:'Digital',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.cd)?r.cd:null;}),backgroundColor:col,borderRadius:4,borderSkipped:false},{label:'Tradicional',data:availTks.map(tk=>{const r=BCP[prefix+'-'+tk];return r&&!isZ(r.ct)?r.ct:null;}),backgroundColor:CTRAD,borderRadius:4,borderSkipped:false,borderColor:'#94a3b8',borderWidth:1.5}]);
     lineEfChart('lSeg');
   });
 }
 
-// ─────────────────────────────────────────
-//  TICKET DETAIL (BCP)
-// ─────────────────────────────────────────
 function renderTicketBCP(p,prefix,tk,segLabel,ctxLabel,hasPre){
   if(hasPre===undefined)hasPre=true;
-  const key=prefix+'-'+tk;
-  const d=BCP[key];
+  const key=prefix+'-'+tk,d=BCP[key];
   if(!d){p.innerHTML=bcHtml(key)+'<div class="no-data"><span>🔍</span>Sin datos para este ticket</div>';return;}
   const nd=isZ(d.cd)&&!isZ(d.ct);
-
-  p.innerHTML=`${bcHtml(key)}
-    <div class="sec-hdr an"><div class="sec-title bcp">${TK[tk]||tk}</div><div class="sec-sub">BCP · ${segLabel} · ${ctxLabel}</div></div>
-    ${hasPre?'':noPre()}
-    ${wlBanner(nd?null:d.ed,d.et,TK[tk]||tk,nd)}
-    ${kpiSection(d,hasPre,false)}
-    <div class="tbl-section an an3"><div class="tbl-hdr"><div class="tbl-title">Comparativo de Canales</div></div>
-    <div class="tbl-scroll"><table>${tHead(hasPre,false)}<tbody>${tRow(TK[tk]||tk,d,hasPre,false,null,'',nd)}</tbody></table></div></div>`;
-
+  p.innerHTML=`${bcHtml(key)}<div class="sec-hdr an"><div class="sec-title bcp">${TK[tk]||tk}</div><div class="sec-sub">BCP · ${segLabel} · ${ctxLabel}</div></div>${hasPre?'':noPre()}${wlBanner(nd?null:d.ed,d.et,TK[tk]||tk,nd)}${kpiSection(d,hasPre,false)}<div class="tbl-section an an3"><div class="tbl-hdr"><div class="tbl-title">Comparativo de Canales</div></div><div class="tbl-scroll"><table>${tHead(hasPre,false)}<tbody>${tRow(TK[tk]||tk,d,hasPre,false,null,'',nd)}</tbody></table></div></div>`;
   requestAnimationFrame(()=>renderDonuts(d,hasPre,false));
 }
 
-// ─────────────────────────────────────────
-//  SIMPLE (sin zoom: 61-90, 91-120, +120)
-// ─────────────────────────────────────────
 function renderSimple(p,key,title,sub,hasPre,hasTickets,noDig){
-  const isYape=entity==='yape';
-  const src=isYape?YAPE:BCP;
-  const d=src[key];
+  const isYape=segEntity==='yape',src=isYape?YAPE:BCP,d=src[key];
   if(!d){p.innerHTML=bcHtml(currentView)+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
-  const nd=noDig||false;
-
-  let tickRows='';
-  if(hasTickets&&!isYape){
-    const tks=['t121-0-1k','t121-1k'];
-    tickRows=tks.map(tk=>tRow(TK[tk.replace('t121-','')]||tk,BCP[tk],hasPre,false,tk,'rs')).join('');
-  }
-
-  const yapeSubRows=isYape&&d.sub?d.sub.map(s=>`<tr><td style="padding-left:24px;font-family:var(--mono);font-size:12px;">${s.l}</td><td class="na-c">—</td><td class="na-c">—</td><td>${fmt.num(s.cd)}</td><td><span class="pill yape">${fmt.pct(s.ed)}</span></td><td>${fmt.mm(s.dvd)}</td><td>${fmt.mm(s.rd)}</td></tr>`).join(''):tickRows;
-
-  p.innerHTML=`${bcHtml(currentView)}
-    <div class="sec-hdr an"><div class="sec-title ${entity}">${title}</div><div class="sec-sub">${entity.toUpperCase()} · ${sub}</div></div>
-    ${hasPre?'':noPre()}
-    ${wlBanner(nd?null:d.ed,d.et,title,nd)}
-    ${kpiSection(d,hasPre,isYape)}
-    <div class="tbl-section an an3"><div class="tbl-hdr"><div class="tbl-title">Indicadores</div><div class="tbl-badge">${hasTickets||isYape&&d.sub?'Desglose disponible':'Sin zoom disponible'}</div></div>
-    <div class="tbl-scroll"><table>${tHead(hasPre,isYape)}<tbody>${tRow(title,d,hasPre,isYape,null,'',nd)}${yapeSubRows}</tbody></table></div></div>`;
-
+  const nd=noDig||!!d.noDig||false;
+  let extra='';
+  if(hasTickets&&!isYape){const tks=['t121-0-1k','t121-1k'];extra=tks.map(tk=>tRow(TK[tk.replace('t121-','')]||tk,BCP[tk],hasPre,false,tk,'rs')).join('');}
+  const yapeSub=isYape&&d.sub?d.sub.map(s=>`<tr><td style="padding-left:24px;font-family:var(--mono);font-size:12px;">${s.l}</td><td class="na-c">—</td><td class="na-c">—</td><td>${fmt.num(s.cd)}</td><td>${fmt.pct(s.ed)!=null?`<span class="pill yape">${fmt.pct(s.ed)}</span>`:'—'}</td><td>${fmt.mm(s.dvd)}</td><td>${fmt.mm(s.rd)}</td></tr>`).join(''):extra;
+  p.innerHTML=`${bcHtml(currentView)}<div class="sec-hdr an"><div class="sec-title ${segEntity}">${title}</div><div class="sec-sub">${segEntity.toUpperCase()} · ${sub}</div></div>${hasPre?'':noPre()}${wlBanner(nd?null:d.ed,isZ(d.et)?null:d.et,title,nd)}${kpiSection(d,hasPre,isYape)}<div class="tbl-section an an3"><div class="tbl-hdr"><div class="tbl-title">Indicadores</div><div class="tbl-badge">${hasTickets||isYape&&d.sub?'Desglose disponible':'Sin zoom'}</div></div><div class="tbl-scroll"><table>${tHead(hasPre,isYape)}<tbody>${tRow(title,d,hasPre,isYape,null,'',nd)}${yapeSub}</tbody></table></div></div>`;
   requestAnimationFrame(()=>renderDonuts(d,hasPre,isYape));
 }
 
-// ─────────────────────────────────────────
-//  TICKET SIMPLE (+120 tickets)
-// ─────────────────────────────────────────
 function renderTicketSimple(p,key,label,tramoLabel){
-  const d=BCP[key];
-  if(!d){p.innerHTML=bcHtml(key)+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
+  const d=BCP[key];if(!d){p.innerHTML=bcHtml(key)+'<div class="no-data"><span>🔍</span>Sin datos</div>';return;}
   const nd=isZ(d.cd)&&!isZ(d.ct);
-
-  p.innerHTML=`${bcHtml(key)}
-    <div class="sec-hdr an"><div class="sec-title bcp">${label}</div><div class="sec-sub">BCP · ${tramoLabel}</div></div>
-    ${noPre()}
-    ${wlBanner(nd?null:d.ed,d.et,label,nd)}
-    ${kpiSection(d,false,false)}
-    <div class="tbl-section an an3"><div class="tbl-hdr"><div class="tbl-title">Comparativo de Canales</div></div>
-    <div class="tbl-scroll"><table>${tHead(false,false)}<tbody>${tRow(label,d,false,false,null,'',nd)}</tbody></table></div></div>`;
-
+  p.innerHTML=`${bcHtml(key)}<div class="sec-hdr an"><div class="sec-title bcp">${label}</div><div class="sec-sub">BCP · ${tramoLabel}</div></div>${noPre()}${wlBanner(nd?null:d.ed,d.et,label,nd)}${kpiSection(d,false,false)}<div class="tbl-section an an3"><div class="tbl-hdr"><div class="tbl-title">Comparativo</div></div><div class="tbl-scroll"><table>${tHead(false,false)}<tbody>${tRow(label,d,false,false,null,'',nd)}</tbody></table></div></div>`;
   requestAnimationFrame(()=>renderDonuts(d,false,false));
 }
 
 // INIT
-navigate('total');
-document.getElementById('nav-total').classList.add('active-bcp');
+renderIndicadores();
+setIndEntity('general');
 </script>
 </body>
 </html>
