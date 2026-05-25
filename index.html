@@ -132,13 +132,32 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 /* ══════════════════════════════════
    SEGUIMIENTO PAGE
 ══════════════════════════════════ */
-.seg-page{display:flex;height:calc(100vh - 105px);overflow:hidden;}
-@media(max-width:900px){.seg-page{height:auto;min-height:calc(100vh - 105px);}}
+/* seg-page: desktop = row (nav + content), mobile = column (tabs + content) */
+.seg-page{display:flex;flex-direction:column;height:calc(100vh - 105px);overflow:hidden;}
+.seg-page>.ent-bar{flex-shrink:0;}
+.seg-page>.right-panel{flex:1;overflow-y:auto;}
+/* On desktop: ent-bar moves inside left panel area, content fills rest */
+@media(min-width:901px){
+  .seg-page{flex-direction:row;}
+  .seg-page>.ent-bar{display:none;} /* hidden — shown inside left-panel on desktop */
+  .left-panel .ent-bar-inner{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
+}
+@media(max-width:900px){
+  .left-panel{position:fixed;left:0;top:0;bottom:0;z-index:160;transform:translateX(-100%);box-shadow:var(--shadow-md);padding-top:60px;width:80%;max-width:280px;}
+  .left-panel.open{transform:translateX(0);}
+  .seg-page{height:auto;min-height:calc(100vh - 105px);}
+  .right-panel{padding:14px 12px;}
+}
 
 /* NAV */
 .left-panel{width:258px;min-width:258px;background:var(--surface);border-right:1px solid var(--border);overflow-y:auto;padding:14px 0;flex-shrink:0;transition:transform .25s ease;}
 .left-panel::-webkit-scrollbar{width:3px;}
 .left-panel::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px;}
+/* Desktop: left-panel sits as a column inside the flex row */
+@media(min-width:901px){
+  .seg-page{flex-direction:row;}
+  .left-panel{position:relative;transform:none !important;height:100%;padding-top:0;}
+}
 .nav-label{font-family:var(--mono);font-size:9.5px;font-weight:600;letter-spacing:2px;color:var(--text4);text-transform:uppercase;padding:0 15px 9px;}
 .tramo-tree{padding:0 5px;}
 .tramo-item{margin-bottom:2px;}
@@ -174,7 +193,9 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:1
 .group-badge{font-family:var(--mono);font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--text4);padding:2px 13px 6px;}
 
 /* ENTITY TABS inside seg page */
-.ent-bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);}
+.ent-bar{display:flex;gap:6px;padding:10px 14px;border-bottom:1px solid var(--border);background:var(--surface);}
+.desktop-only{display:none;}
+@media(min-width:901px){.desktop-only{display:flex;}.seg-page>.ent-bar{display:none !important;}}
 .ent-tab{padding:7px 16px;border-radius:8px;border:1.5px solid var(--border);background:var(--surface2);cursor:pointer;font-family:var(--sans);font-size:13px;font-weight:700;color:var(--text3);transition:all .16s;}
 .ent-tab.bcp.active{color:var(--bcp);border-color:var(--bcp);background:var(--bcp-pale);}
 .ent-tab.yape.active{color:var(--yape);border-color:var(--yape);background:var(--yape-pale);}
@@ -418,14 +439,20 @@ td:first-child{text-align:left;color:var(--text);font-weight:700;font-family:var
 <div class="page" id="page-seg">
 <div class="seg-page">
 
-  <!-- LEFT NAV -->
-  <div style="display:flex;flex-direction:column;width:258px;min-width:258px;flex-shrink:0;">
-    <div class="ent-bar">
-      <button class="ent-tab bcp active" id="tab-bcp" onclick="setEntity('bcp')"><span class="ent-dot"></span>BCP</button>
-      <button class="ent-tab yape" id="tab-yape" onclick="setEntity('yape')"><span class="ent-dot"></span>Yape</button>
+  <!-- ENTITY TABS — visible always, outside the drawer -->
+  <div class="ent-bar" id="entBar">
+    <button class="ent-tab bcp active" id="tab-bcp" onclick="setEntity('bcp')"><span class="ent-dot"></span>BCP</button>
+    <button class="ent-tab yape" id="tab-yape" onclick="setEntity('yape')"><span class="ent-dot"></span>Yape</button>
+  </div>
+
+  <!-- LEFT NAV DRAWER -->
+  <nav class="left-panel" id="leftPanel">
+    <!-- Desktop entity tabs (hidden on mobile) -->
+    <div class="ent-bar desktop-only" id="entBarDesktop">
+      <button class="ent-tab bcp active" id="tab-bcp-d" onclick="setEntity('bcp')"><span class="ent-dot"></span>BCP</button>
+      <button class="ent-tab yape" id="tab-yape-d" onclick="setEntity('yape')"><span class="ent-dot"></span>Yape</button>
     </div>
-    <nav class="left-panel" id="leftPanel" style="height:auto;flex:1;">
-      <div class="tramo-tree">
+    <div class="tramo-tree">
         <div class="nav-label">Navegación</div>
         <div class="tramo-item">
           <button class="t-btn" id="nav-total" onclick="navAndClose('total')">
@@ -570,7 +597,6 @@ td:first-child{text-align:left;color:var(--text);font-weight:700;font-family:var
         </div>
       </div>
     </nav>
-  </div>
 
   <main class="right-panel" id="rightPanel"></main>
 </div>
@@ -1170,10 +1196,15 @@ function renderIndicadores(){
 // ═══════════════════════════════════════════════════════════════════
 function setEntity(e){
   segEntity=e;
-  document.getElementById('tab-bcp').className='ent-tab bcp'+(e==='bcp'?' active':'');
-  document.getElementById('tab-yape').className='ent-tab yape'+(e==='yape'?' active':'');
+  ['bcp','yape'].forEach(x=>{
+    ['tab-'+x,'tab-'+x+'-d'].forEach(id=>{
+      const el=document.getElementById(id);
+      if(el)el.className='ent-tab '+x+(e===x?' active':'');
+    });
+  });
   ['plus120-group','nav-plus120-item'].forEach(id=>{
-    document.getElementById(id).style.display=e==='yape'?'none':'';
+    const el=document.getElementById(id);
+    if(el)el.style.display=e==='yape'?'none':'';
   });
   if(e==='yape'&&(currentView.startsWith('t121')||currentView.startsWith('py')||currentView.startsWith('seg'))){
     navigate('total');
